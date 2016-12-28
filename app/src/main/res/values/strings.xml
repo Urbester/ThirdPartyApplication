@@ -5,4 +5,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_discover">Discover Fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_search">Search fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_my_events">My events fragment</string>
 </resources>

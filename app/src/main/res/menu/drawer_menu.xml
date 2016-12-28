@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_first_fragment"
+            android:checked="true"
+            android:icon="@drawable/food_fork_drink"
+            android:title="Discover" />
+        <item
+            android:id="@+id/nav_second_fragment"
+            android:icon="@drawable/calendar_clock"
+            android:title="Events" />
+        <item
+            android:id="@+id/nav_third_fragment"
+            android:icon="@drawable/logout_variant"
+            android:title="Logout" />
+    </group>
+</menu>

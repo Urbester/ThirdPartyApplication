@@ -79,7 +79,10 @@ public class LoginRegisterActivity extends Activity {
                 String user_id = loginResult.getAccessToken().getUserId();
                 String user_token = loginResult.getAccessToken().getToken();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("user_id", user_id);
+                i.putExtra("user_token", user_token);
                 startActivity(i);
+                finish();
             }
 
             @Override

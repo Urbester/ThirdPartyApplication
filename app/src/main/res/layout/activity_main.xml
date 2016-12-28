@@ -17,15 +17,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- The main content view where fragments are loaded -->
-        <FrameLayout
-            android:id="@+id/flContent"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <!-- The main content view where fragments are loaded -->
+            <FrameLayout
+                android:id="@+id/flContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/plus"
+                app:layout_anchorGravity="bottom|right|end" />
+        </android.support.design.widget.CoordinatorLayout>
     </LinearLayout>
 
-    <!-- The navigation drawer that comes from the left -->
-    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
     <android.support.design.widget.NavigationView
         android:id="@+id/nvView"
         android:layout_width="wrap_content"
@@ -34,4 +44,5 @@
         android:background="@android:color/white"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu" />
+
 </android.support.v4.widget.DrawerLayout>

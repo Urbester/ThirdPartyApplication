@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+    private String facebook_user_id;
+    private String facebook_user_token;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.facebook_user_id = getIntent().getStringExtra("user_id");
+        this.facebook_user_token = getIntent().getStringExtra("user_token");
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,9 +55,24 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the header view at runtime
         View headerLayout = nvDrawer.inflateHeaderView(R.layout.nav_header);
 
-
+        /*Loads nav_header logo*/
         ImageView img = (ImageView) headerLayout.findViewById(R.id.nav_header_logo);
-        Picasso.with(getApplicationContext()).load(R.drawable.logo).centerCrop().resize(200, 200).into(img);
+        Picasso.with(getApplicationContext()).load(R.drawable.logo).resize(1000, 1000).into(img);
+
+        /* Start Discover Fragment */
+        Class fragmentClass = DiscoverFragment.class;
+        try {
+            Fragment discover = (Fragment) fragmentClass.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, discover).commit();
+            setTitle("Discover");
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

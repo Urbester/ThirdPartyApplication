@@ -3,10 +3,11 @@ package com.example.alizardo.thirdparty;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
@@ -74,15 +75,22 @@ public class CreateEventFormFragment extends Fragment {
         }
     }
 
+    public void newEvent(View button) {
+        Toast.makeText(this.getActivity(), "Event created !", Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        // Not necessary
+        /*
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override

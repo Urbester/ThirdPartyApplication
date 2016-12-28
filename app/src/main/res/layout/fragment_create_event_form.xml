@@ -1,13 +1,132 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.alizardo.thirdparty.CreateEventFormFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ScrollView
+        android:layout_marginLeft="@dimen/form_left_margin"
+        android:layout_marginRight="@dimen/form_right_margin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="com.example.alizardo.thirdparty.CreateEventFormFragment">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/form_bottom_margin"
+                android:textSize="@dimen/form"
+                android:text="Title" />
+
+            <EditText
+                android:id="@+id/NewEventFormName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/form_title"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:inputType="textPersonName" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="Description" />
+            <EditText
+                android:id="@+id/NewEventFormDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/form_description"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:inputType="textMultiLine"
+                android:lines="2" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="Location" />
+            <EditText
+                android:id="@+id/NewEventFormLocation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/form_location"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:inputType="text" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="Price" />
+            <EditText
+                android:id="@+id/NewEventFormPrice"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/form_price"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:inputType="numberSigned" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="Start Date" />
+            <DatePicker
+                android:id="@+id/NewEventFormStartDate"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="Start Hour" />
+            <TimePicker
+                android:id="@+id/NewEventFormStartDateTime"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="End Date" />
+            <DatePicker
+                android:id="@+id/NewEventFormEndDate"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form"
+                android:text="End Hour" />
+            <TimePicker
+                android:id="@+id/NewEventFormEndDateTime"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:background="@color/primary"
+                android:textColor="#FFF"
+                android:textSize="@dimen/form"
+                android:id="@+id/ButtonSendFeedback"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="@dimen/form_bottom_margin"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_height="wrap_content"
+                android:text="Create" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

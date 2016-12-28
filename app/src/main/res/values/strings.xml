@@ -11,4 +11,11 @@
     <string name="hello_search">Search fragment</string>
 
     <string name="hello_my_events">My events fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="form_title">Awesome Italian dinner. Pasta \% Red Wine. Join us !</string>
+    <string name="form_description">Awesome Italian dinner. Pasta \% Red Wine. Join us !</string>
+    <string name="form_location">John Doe House</string>
+    <string name="form_price">5€</string>
 </resources>

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private String facebook_user_id;
     private String facebook_user_token;
+    private Bundle basicInfo;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.

@@ -158,10 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = DiscoverFragment.class;
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = SearchFragment.class;
-                break;
-            case R.id.nav_third_fragment:
-                fragmentClass = MyEventsFragment.class;
+                fragmentClass = EventFragment.class;
                 break;
             default:
                 fragmentClass = DiscoverFragment.class;

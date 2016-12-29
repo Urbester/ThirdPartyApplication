@@ -1,6 +1,9 @@
 package com.example.alizardo.thirdparty;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,6 +44,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             endDate = (TextView) v.findViewById(R.id.endDate);
             numGuests = (TextView) v.findViewById(R.id.numGuests);
             url = (ImageView) v.findViewById(R.id.pic);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    Bundle b = new Bundle();
+                    b.putString("title", ((TextView) v.findViewById(R.id.title)).getText().toString());
+                    b.putString("host", ((TextView) v.findViewById(R.id.host)).getText().toString());
+                    b.putString("description", ((TextView) v.findViewById(R.id.description)).getText().toString());
+                    b.putString("startDate", ((TextView) v.findViewById(R.id.startDate)).getText().toString());
+                    b.putString("endDate", ((TextView) v.findViewById(R.id.endDate)).getText().toString());
+                    b.putString("numGuests", ((TextView) v.findViewById(R.id.numGuests)).getText().toString());
+                    b.putString("url", ((ImageView) v.findViewById(R.id.pic)).getTag().toString());
+                    Intent i = new Intent(activity, EventOverviewActivity.class);
+                    i.putExtras(b);
+                    activity.startActivity(i);
+                }
+            });
+
         }
     }
 
@@ -77,6 +99,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // Load Image from URL
         Context context = holder.url.getContext();
         Picasso.with(context).load(mDataset.get(position).getUrl()).into(holder.url);
+
+        holder.url.setTag(mDataset.get(position).getUrl());
+
     }
 
 

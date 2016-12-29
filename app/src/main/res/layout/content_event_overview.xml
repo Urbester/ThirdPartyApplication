@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.alizardo.thirdparty.EventOverviewActivity"
+    tools:showIn="@layout/activity_event_overview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/img_evt_overview"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:id="@+id/hostLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/form_bottom_margin"
+            android:layout_marginLeft="@dimen/form_left_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hostTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Host"
+                android:textSize="@dimen/form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/host"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/descriptionLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hostLayout"
+            android:layout_marginBottom="@dimen/form_bottom_margin"
+            android:layout_marginLeft="@dimen/form_left_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/descriptionTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+
+                android:textSize="@dimen/form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+
+                android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/startDateLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/descriptionLayout"
+            android:layout_marginBottom="@dimen/form_bottom_margin"
+            android:layout_marginLeft="@dimen/form_left_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/startDateTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Starts"
+
+                android:textSize="@dimen/form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+
+                android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/endDateLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startDateLayout"
+            android:layout_marginBottom="@dimen/form_bottom_margin"
+            android:layout_marginLeft="@dimen/form_left_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/endDateTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ends"
+
+                android:textSize="@dimen/form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+
+                android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/numGuestsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/endDateLayout"
+            android:layout_marginBottom="@dimen/form_bottom_margin"
+            android:layout_marginLeft="@dimen/form_left_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/numGuestsTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slots left: "
+                android:textStyle="bold"
+                android:textSize="@dimen/form" />
+
+            <TextView
+                android:id="@+id/numGuests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

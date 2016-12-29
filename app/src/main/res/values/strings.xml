@@ -18,6 +18,7 @@
     <string name="form_description">Awesome Italian dinner. Pasta \% Red Wine. Join us !</string>
     <string name="form_location">John Doe House</string>
     <string name="form_price">5€</string>
+
     <string name="myevents_tab_invited">Invited</string>
     <string name="myevents_tab_hosting">Hosting</string>
     <string name="myevents_tab_rejected">Rejected</string>

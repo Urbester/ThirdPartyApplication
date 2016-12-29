@@ -5,4 +5,7 @@
     <color name="background">#E0E4CC</color>
     <color name="secondary">#A7DBD8</color>
     <color name="secondaryhigh">#69D2E7</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
+    <color name="accept">#41b441</color>
 </resources>

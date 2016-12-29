@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.facebook.login.LoginManager;
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
         this.facebook_user_id = getIntent().getStringExtra("user_id");
         this.facebook_user_token = getIntent().getStringExtra("user_token");
+
+        Button loginButtonOnDrawer = (Button) findViewById(R.id.login_button);
+        loginButtonOnDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logOut();
+                finish();
+                System.exit(0);
+            }
+        });
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -22,47 +22,49 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Event> mDataset;
+    private int pos;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cv;
         public TextView title;
-        public TextView host;
-        public TextView description;
-        public TextView startDate;
-        public TextView endDate;
-        public TextView numGuests;
         public ImageView url;
+        private View v;
+        private int pos;
+        private List<Event> mDataset;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, List<Event> ds) {
             super(v);
-            cv = (CardView) v.findViewById(R.id.card_view);
+            mDataset = ds;
+
             title = (TextView) v.findViewById(R.id.title);
-            host = (TextView) v.findViewById(R.id.host);
-            description = (TextView) v.findViewById(R.id.description);
-            startDate = (TextView) v.findViewById(R.id.startDate);
-            endDate = (TextView) v.findViewById(R.id.endDate);
-            numGuests = (TextView) v.findViewById(R.id.numGuests);
             url = (ImageView) v.findViewById(R.id.pic);
+            cv = (CardView) v.findViewById(R.id.card_view);
+            this.v = v;
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     Bundle b = new Bundle();
-                    b.putString("title", ((TextView) v.findViewById(R.id.title)).getText().toString());
-                    b.putString("host", ((TextView) v.findViewById(R.id.host)).getText().toString());
-                    b.putString("description", ((TextView) v.findViewById(R.id.description)).getText().toString());
-                    b.putString("startDate", ((TextView) v.findViewById(R.id.startDate)).getText().toString());
-                    b.putString("endDate", ((TextView) v.findViewById(R.id.endDate)).getText().toString());
-                    b.putString("numGuests", ((TextView) v.findViewById(R.id.numGuests)).getText().toString());
-                    b.putString("url", ((ImageView) v.findViewById(R.id.pic)).getTag().toString());
+                    int pos =  (int) v.findViewById(R.id.title).getTag();
+                    b.putString("title", mDataset.get(pos).getTitle());
+                    b.putString("host", mDataset.get(pos).getHost());
+                    b.putString("description", mDataset.get(pos).getDescription());
+                    b.putString("startDate", mDataset.get(pos).getStartDate());
+                    b.putString("endDate", mDataset.get(pos).getEndDate());
+                    b.putString("numGuests", mDataset.get(pos).getNumGuests());
+                    b.putString("url", mDataset.get(pos).getUrl());
                     Intent i = new Intent(activity, EventOverviewActivity.class);
                     i.putExtras(b);
                     activity.startActivity(i);
                 }
             });
 
+        }
+
+        public View getV() {
+            return v;
         }
     }
 
@@ -82,7 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v, this.mDataset);
         return vh;
     }
 
@@ -90,23 +92,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(mDataset.get(position).getTitle());
-        holder.host.setText(mDataset.get(position).getHost());
-        holder.description.setText(mDataset.get(position).getDescription());
-        holder.startDate.setText(mDataset.get(position).getStartDate());
-        holder.endDate.setText(mDataset.get(position).getEndDate());
-        holder.numGuests.setText(mDataset.get(position).getNumGuests());
-
-        // Load Image from URL
+        holder.title.setTag(position);
         Context context = holder.url.getContext();
         Picasso.with(context).load(mDataset.get(position).getUrl()).into(holder.url);
-
         holder.url.setTag(mDataset.get(position).getUrl());
-
+        this.pos = position;
     }
-
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
 }

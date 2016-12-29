@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -87,12 +88,12 @@ public class LoginRegisterActivity extends Activity {
 
             @Override
             public void onCancel() {
-                info.setText("Login attempt canceled.");
+                Toast.makeText(LoginRegisterActivity.this, "Login canceled, try again later.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException e) {
-                info.setText("Login attempt failed.");
+                Toast.makeText(LoginRegisterActivity.this, "Please, try again later.", Toast.LENGTH_SHORT).show();
             }
         });
 

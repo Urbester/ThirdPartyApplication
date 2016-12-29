@@ -6,159 +6,30 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     card_view:cardBackgroundColor="@color/cardview_light_background"
-    card_view:cardCornerRadius="13dp"
+    card_view:cardCornerRadius="0dp"
     card_view:cardElevation="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
             android:id="@+id/pic"
-            android:scaleType="centerCrop"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_orange_dark"
             android:layout_below="@id/pic"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/card_title"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/hostLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/title">
-
-            <TextView
-                android:id="@+id/hostTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="Host: "
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/host"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#000" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/descriptionLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/hostLayout">
-
-            <TextView
-                android:id="@+id/descriptionTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="Description: "
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/startDateLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/descriptionLayout">
-
-            <TextView
-                android:id="@+id/startDateTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="Starts: "
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/startDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/endDateLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/startDateLayout">
-
-            <TextView
-                android:id="@+id/endDateTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="Ends: "
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/numGuestsLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/endDateLayout">
-
-            <TextView
-                android:id="@+id/numGuestsTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:text="Guests so far: "
-                android:textColor="#000" />
-
-            <TextView
-                android:id="@+id/numGuests"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
 
     </RelativeLayout>
 

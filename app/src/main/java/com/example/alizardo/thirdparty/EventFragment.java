@@ -80,9 +80,9 @@ public class EventFragment extends Fragment {
                         Context context = getContext();
                         CharSequence text = "Hello toast!";
                         int duration = Toast.LENGTH_LONG;
+                        //TODO insert cards here
 
-                        Toast toast = Toast.makeText(context, "Tab 1", duration);
-                        toast.show();
+
                         break;
                     case 1: break;
                     case 2: break;

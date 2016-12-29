@@ -24,5 +24,6 @@
     <string name="myevents_tab_pending">Pending</string>
 
     <string name="title_activity_event_overview">Event Overview</string>
+    <string name="logout_message">Are you sure you want to logout?</string>
 
 </resources>

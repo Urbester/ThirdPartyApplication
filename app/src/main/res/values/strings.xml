@@ -23,5 +23,7 @@
     <string name="myevents_tab_rejected">Rejected</string>
     <string name="myevents_tab_pending">Pending</string>
 
+    <string name="title_activity_create_event_form">New Party</string>
+
     <string name="title_activity_event_overview">Event Overview</string>
 </resources>

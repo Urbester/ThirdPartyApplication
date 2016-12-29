@@ -12,7 +12,6 @@
 
     <string name="hello_my_events">My events fragment</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="form_title">Awesome Italian dinner. Pasta \% Red Wine. Join us !</string>
     <string name="form_description">Awesome Italian dinner. Pasta \% Red Wine. Join us !</string>
@@ -23,4 +22,7 @@
     <string name="myevents_tab_hosting">Hosting</string>
     <string name="myevents_tab_rejected">Rejected</string>
     <string name="myevents_tab_pending">Pending</string>
+
+    <string name="title_activity_event_overview">Event Overview</string>
+
 </resources>

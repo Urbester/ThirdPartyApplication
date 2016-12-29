@@ -82,7 +82,6 @@ public class EventFragment extends Fragment {
                         int duration = Toast.LENGTH_LONG;
                         //TODO insert cards here
 
-
                         break;
                     case 1: break;
                     case 2: break;

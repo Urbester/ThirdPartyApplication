@@ -101,6 +101,8 @@ public class LoginRegisterActivity extends Activity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+
+
     @Override
     public void onStart() {
         super.onStart();

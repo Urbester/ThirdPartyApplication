@@ -1,5 +1,6 @@
 package com.example.alizardo.thirdparty;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,18 +65,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton createEventBtn = (FloatingActionButton) findViewById(R.id.newEvent);
         createEventBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /* Start Discover Fragment */
-                Class fragmentClass = CreateEventFormFragment.class;
-                try {
-                    Fragment createEventForm = (Fragment) fragmentClass.newInstance();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.flContent, createEventForm).commit();
-                    setTitle("New Party");
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                Intent i = new Intent(getApplication(), CreateEventFormActivity.class);
+                startActivity(i);
             }
         });
 

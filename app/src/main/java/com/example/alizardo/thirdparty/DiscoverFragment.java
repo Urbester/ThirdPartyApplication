@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,20 +74,7 @@ public class DiscoverFragment extends Fragment {
 
         // Initialize dummy data
         List<Event> myDataset = new ArrayList<>();
-        myDataset.add(new Event("Banana nesse cu", "Amaral", "Ir às bananas para o Choupal", "12/01/2017 18:30", "12/01/2017 20:30", "1", "http://www.canamix.com.br/imagens/uploads/conteudos/20160916105535yMlJfMRoqH.jpg"));
-        myDataset.add(new Event("Emborrachar o Amaral", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
-        myDataset.add(new Event("Banana nesse cu", "Amaral", "Ir às bananas para o Choupal", "12/01/2017 18:30", "12/01/2017 20:30", "1", "http://www.canamix.com.br/imagens/uploads/conteudos/20160916105535yMlJfMRoqH.jpg"));
-        myDataset.add(new Event("Emborrachar o Amaral", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
-        myDataset.add(new Event("Banana nesse cu", "Amaral", "Ir às bananas para o Choupal", "12/01/2017 18:30", "12/01/2017 20:30", "1", "http://www.canamix.com.br/imagens/uploads/conteudos/20160916105535yMlJfMRoqH.jpg"));
-        myDataset.add(new Event("Emborrachar o Amaral", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
-        myDataset.add(new Event("Banana nesse cu", "Amaral", "Ir às bananas para o Choupal", "12/01/2017 18:30", "12/01/2017 20:30", "1", "http://www.canamix.com.br/imagens/uploads/conteudos/20160916105535yMlJfMRoqH.jpg"));
-        myDataset.add(new Event("Emborrachar o Amaral", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
-        myDataset.add(new Event("Banana nesse cu", "Amaral", "Ir às bananas para o Choupal", "12/01/2017 18:30", "12/01/2017 20:30", "1", "http://www.canamix.com.br/imagens/uploads/conteudos/20160916105535yMlJfMRoqH.jpg"));
-        myDataset.add(new Event("Emborrachar o Amaral", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
+        myDataset.add(new Event("Passagem de Ano no Choupal", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
         myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
 
         // specify an adapter

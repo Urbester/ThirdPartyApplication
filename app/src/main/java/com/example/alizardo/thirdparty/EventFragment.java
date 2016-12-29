@@ -3,21 +3,24 @@ package com.example.alizardo.thirdparty;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MyEventsFragment.OnFragmentInteractionListener} interface
+ * {@link EventFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MyEventsFragment#newInstance} factory method to
+ * Use the {@link EventFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyEventsFragment extends Fragment {
+public class EventFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,21 +32,15 @@ public class MyEventsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MyEventsFragment() {
+    TabLayout tabLayout;
+    private static final String ARG_PAGE_NUMBER = "page_number";
+
+    public EventFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyEventsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyEventsFragment newInstance(String param1, String param2) {
-        MyEventsFragment fragment = new MyEventsFragment();
+    public static EventFragment newInstance(String param1, String param2) {
+        EventFragment fragment = new EventFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,8 +61,50 @@ public class MyEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_events, container, false);
+        View v = (View) inflater.inflate(R.layout.fragment_event, container, false);
+        //TabLayout Setup
+        setupTablayout(v);
+
+        final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
+        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(),getContext());
+
+        pager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(pager);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                pager.setCurrentItem(tab.getPosition());
+                switch (tab.getPosition()) {
+                    case 0:
+                        Context context = getContext();
+                        CharSequence text = "Hello toast!";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, "Tab 1", duration);
+                        toast.show();
+                        break;
+                    case 1: break;
+                    case 2: break;
+                }
+
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        return v;
     }
+
+    private void setupTablayout(View v){
+        tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -77,16 +116,12 @@ public class MyEventsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Removed, not necessary
-        /*
-        if (context instanceof OnFragmentInteractionListener) {
-
+        /*if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
-        */
+        }*/
     }
 
     @Override

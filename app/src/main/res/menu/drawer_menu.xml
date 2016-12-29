@@ -11,8 +11,11 @@
             android:icon="@drawable/calendar_clock"
             android:title="Events" />
         <item
-            android:id="@+id/nav_third_fragment"
-            android:icon="@drawable/logout_variant"
-            android:title="Logout" />
+            android:id="@+id/footer_space"
+            android:checkable="false"
+            android:enabled="false"
+            android:orderInCategory="200"
+            android:title="" />
+
     </group>
 </menu>

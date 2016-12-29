@@ -24,6 +24,4 @@
     <string name="myevents_tab_pending">Pending</string>
 
     <string name="title_activity_event_overview">Event Overview</string>
-    <string name="title_activity_create_event_form">CreateEventFormActivity</string>
-
 </resources>

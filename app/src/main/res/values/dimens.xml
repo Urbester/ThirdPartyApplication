@@ -10,8 +10,8 @@
     <dimen name="form_bottom_margin">10dp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="form">30dp</dimen>
-    <dimen name="form_small">25dp</dimen>
+    <dimen name="form">30sp</dimen>
+    <dimen name="form_small">25sp</dimen>
     <dimen name="card_title">25sp</dimen>
     <dimen name="card_info">20sp</dimen>
     <dimen name="app_bar_height">180dp</dimen>

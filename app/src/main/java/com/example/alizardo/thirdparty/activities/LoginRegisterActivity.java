@@ -191,7 +191,7 @@ public class LoginRegisterActivity extends Activity {
             HashMap map = util.jsonToHashMap(response);
 
             // TREAT DATA IN map HERE
-            Toast.makeText(LoginRegisterActivity.this, "Services OK!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginRegisterActivity.this, "Welcome, " + b.getString("Name"), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplication(), MainActivity.class);
             i.putExtras(b);
             startActivity(i);

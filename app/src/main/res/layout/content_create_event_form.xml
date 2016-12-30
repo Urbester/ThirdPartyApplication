@@ -128,7 +128,7 @@
                 android:layout_marginTop="@dimen/form_bottom_margin"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
                 android:layout_height="wrap_content"
-                android:text="Create" />
+                android:text="@string/create" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -26,4 +26,7 @@
     <string name="title_activity_create_event_form">New Party</string>
 
     <string name="title_activity_event_overview">Event Overview</string>
+    <string name="title_activity_search">Search</string>
+    <string name="query">Query</string>
+    <string name="create">Create</string>
 </resources>

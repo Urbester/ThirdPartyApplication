@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,15 +6,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.adapters.TabsPagerAdapter;
 
 
 /**

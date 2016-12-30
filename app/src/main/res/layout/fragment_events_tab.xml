@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.alizardo.thirdparty.EventsTabFragment">
+    tools:context="com.example.alizardo.thirdparty.fragments.EventsTabFragment">
 
 
     <TextView android:id="@+id/page_number_label"
@@ -21,7 +21,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.example.alizardo.thirdparty.MainActivity"
+        tools:context="com.example.alizardo.thirdparty.activities.MainActivity"
         android:orientation="vertical">
 
         <!-- A RecyclerView with some commonly used attributes-->

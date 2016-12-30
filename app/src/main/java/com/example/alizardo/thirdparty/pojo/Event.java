@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.pojo;
 
 /**
  * Created by Eduardo Silva on 28/12/2016.

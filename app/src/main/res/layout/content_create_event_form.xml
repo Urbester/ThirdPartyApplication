@@ -5,7 +5,7 @@
     android:layout_below="@+id/appbar"
     android:orientation="vertical"
     android:paddingTop="@dimen/create_form_top"
-    tools:context="com.example.alizardo.thirdparty.CreateEventFormActivity">
+    tools:context="com.example.alizardo.thirdparty.activities.CreateEventFormActivity">
 
     <ScrollView
         android:layout_marginLeft="@dimen/form_left_margin"

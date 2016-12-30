@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -34,6 +39,9 @@ public class EventFragment extends Fragment {
 
     TabLayout tabLayout;
     private static final String ARG_PAGE_NUMBER = "page_number";
+    private RecyclerView mRecyclerView;
+    private MyAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public EventFragment() {
         // Required empty public constructor
@@ -62,44 +70,57 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = (View) inflater.inflate(R.layout.fragment_event, container, false);
+
         //TabLayout Setup
         setupTablayout(v);
 
         final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
-        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(),getContext());
+        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext());
 
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition());
+                Context context = getContext();
+
                 switch (tab.getPosition()) {
                     case 0:
-                        Context context = getContext();
-                        CharSequence text = "Hello toast!";
-                        int duration = Toast.LENGTH_LONG;
-                        //TODO insert cards here
-
                         break;
-                    case 1: break;
-                    case 2: break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        break;
+
                 }
 
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
 
+
+
         return v;
     }
 
-    private void setupTablayout(View v){
+    private void setupTablayout(View v) {
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }

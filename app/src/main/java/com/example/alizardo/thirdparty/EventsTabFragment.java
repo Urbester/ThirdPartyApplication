@@ -5,11 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,6 +29,10 @@ public class EventsTabFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+
+    private RecyclerView mRecyclerView;
+    private MyAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
 
     public EventsTabFragment() {
@@ -51,8 +58,29 @@ public class EventsTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View v = inflater.inflate(R.layout.fragment_events_tab, container, false);
 
-        return inflater.inflate(R.layout.fragment_events_tab, container, false);
+
+        this.mRecyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
+
+        // Initialize dummy data
+        List<Event> myDataset = new ArrayList<>();
+        myDataset.add(new Event("Passagem de Ano no Choupal", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
+        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
+
+        // specify an adapter
+        this.mAdapter = new MyAdapter(myDataset);
+
+        // use a linear layout manager
+        this.mLayoutManager = new LinearLayoutManager(getActivity());
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        this.mRecyclerView.setHasFixedSize(true);
+        this.mRecyclerView.setLayoutManager(this.mLayoutManager);
+        this.mRecyclerView.setAdapter(this.mAdapter);
+
+        return v;
 
     }
 

@@ -155,7 +155,7 @@ class GET extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
         if (response == null) {
             response = "THERE WAS AN ERROR";
-        }
+        }s
         Utils util = new Utils();
         HashMap map = util.jsonToHashMap(response);
 

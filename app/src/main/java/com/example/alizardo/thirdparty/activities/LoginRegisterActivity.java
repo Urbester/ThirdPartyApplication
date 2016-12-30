@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -14,10 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.libs.Utils;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -25,8 +29,13 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by alizardo on 27/12/2016.
@@ -35,6 +44,7 @@ public class LoginRegisterActivity extends Activity {
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private Bundle b;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -52,7 +62,7 @@ public class LoginRegisterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        b = new Bundle();
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.example.alizardo.thirdparty",
@@ -78,15 +88,49 @@ public class LoginRegisterActivity extends Activity {
         ImageView img = (ImageView) findViewById(R.id.Logo);
         Picasso.with(getApplicationContext()).load(R.drawable.logo).centerCrop().resize(550, 550).into(img);
 
+        loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_friends"));
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                String user_id = loginResult.getAccessToken().getUserId();
-                String user_token = loginResult.getAccessToken().getToken();
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("user_id", user_id);
-                i.putExtra("user_token", user_token);
-                startActivity(i);
+            public void onSuccess(final LoginResult loginResult) {
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                try {
+
+                                    HashMap<String, String> headers = new HashMap<>();
+                                    HashMap<String, String> payload = new HashMap<>();
+
+                                    b.putString("AccessToken", loginResult.getAccessToken().getToken());
+                                    b.putString("Name", object.getString("name"));
+                                    b.putString("Email", object.getString("email"));
+                                    b.putString("PhotoLink", object.getJSONObject("picture").getJSONObject("data").getString("url"));
+
+
+                                    payload.put("AccessToken", loginResult.getAccessToken().getToken());
+                                    payload.put("Name", object.getString("name"));
+                                    payload.put("Email", object.getString("email"));
+                                    payload.put("PhotoLink", object.getJSONObject("picture").getJSONObject("data").getString("url"));
+
+                                    CreateAccount worker = new CreateAccount();
+                                    worker.execute("/v1/account", "POST", headers, payload);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,email,name,picture.type(large)");
+                request.setParameters(parameters);
+                request.executeAsync();
+
                 finish();
             }
 
@@ -125,6 +169,34 @@ public class LoginRegisterActivity extends Activity {
 
             }
         }, 2000);
+    }
+
+    class CreateAccount extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+            Log.i("STATUS", "Starting GET request...");
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null) {
+                response = "THERE WAS AN ERROR";
+            }
+            Log.i("response: ", response);
+            Utils util = new Utils();
+            HashMap map = util.jsonToHashMap(response);
+
+            // TREAT DATA IN map HERE
+            Toast.makeText(LoginRegisterActivity.this, "Services OK!", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplication(), MainActivity.class);
+            i.putExtras(b);
+            startActivity(i);
+            finish();
+        }
     }
 
 }

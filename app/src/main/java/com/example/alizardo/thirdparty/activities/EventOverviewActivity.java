@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.activities;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alizardo.thirdparty.R;
 import com.squareup.picasso.Picasso;
 
 

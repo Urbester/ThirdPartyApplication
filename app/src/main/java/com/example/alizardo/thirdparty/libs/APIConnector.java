@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.libs;
 
 import android.content.Context;
 import android.support.v4.util.ArrayMap;

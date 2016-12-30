@@ -1,12 +1,12 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 
+import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.fragments.EventsTabFragment;
 
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {

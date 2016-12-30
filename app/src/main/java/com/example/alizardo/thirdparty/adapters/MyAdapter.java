@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.activities.EventOverviewActivity;
+import com.example.alizardo.thirdparty.pojo.Event;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.alizardo.thirdparty;
+package com.example.alizardo.thirdparty.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -19,12 +19,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.alizardo.thirdparty.fragments.DiscoverFragment;
+import com.example.alizardo.thirdparty.fragments.EventFragment;
+import com.example.alizardo.thirdparty.R;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
+
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;

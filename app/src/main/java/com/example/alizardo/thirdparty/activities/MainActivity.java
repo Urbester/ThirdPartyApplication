@@ -17,11 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.fragments.DiscoverFragment;
 import com.example.alizardo.thirdparty.fragments.EventFragment;
-import com.example.alizardo.thirdparty.R;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-    private String facebook_user_id;
     private String facebook_user_token;
+    private String email;
+    private String name;
+    private String user_image_url;
     private Bundle basicInfo;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
@@ -53,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        this.facebook_user_id = getIntent().getStringExtra("user_id");
-        this.facebook_user_token = getIntent().getStringExtra("user_token");
+        basicInfo = getIntent().getExtras();
+        this.facebook_user_token = basicInfo.getString("AccessToken");
+        this.email = basicInfo.getString("Email");
+        this.name = basicInfo.getString("Name");
+        this.user_image_url = basicInfo.getString("PhotoLink");
 
         Button loginButtonOnDrawer = (Button) findViewById(R.id.login_button);
         loginButtonOnDrawer.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
         /*Loads nav_header logo*/
         ImageView img = (ImageView) headerLayout.findViewById(R.id.nav_header_logo);
-        Picasso.with(getApplicationContext()).load(R.drawable.logo).resize(1000, 1000).into(img);
+        Picasso.with(getApplicationContext()).load(this.user_image_url).resize(300, 300).into(img);
+
+        TextView name = (TextView) headerLayout.findViewById(R.id.name_text_view);
+        name.setText(this.name);
 
         /* Start Discover Fragment */
         Class fragmentClass = DiscoverFragment.class;

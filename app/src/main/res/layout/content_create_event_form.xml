@@ -35,12 +35,20 @@
                 android:hint="@string/form_title"
                 android:inputType="textPersonName" />
 
-            <CheckBox
-                android:id="@+id/NewEventFormPublicCheck"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/eventPublic" />
+                android:layout_marginTop="@dimen/form_bottom_margin"
+                android:text="Image URL"
+                android:textSize="@dimen/form" />
+
+            <EditText
+                android:id="@+id/NewEventFormURL"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="@string/put_your_image_link_here"
+                android:inputType="text" />
 
 
             <TextView
@@ -69,6 +77,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:text=""
                 android:hint="@string/form_location"
                 android:inputType="text" />
 
@@ -134,6 +143,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/form_bottom_margin" />
 
+
+            <CheckBox
+                android:id="@+id/NewEventFormPublicCheck"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:layout_marginTop="@dimen/form_bottom_margin"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text"
+                android:text="@string/eventPublic" />
+
             <Button
                 android:id="@+id/createEventButton"
                 android:layout_width="fill_parent"
@@ -142,6 +162,7 @@
                 android:layout_marginTop="@dimen/form_bottom_margin"
                 android:background="@color/primary"
                 android:text="@string/create"
+                android:textAllCaps="false"
                 android:textColor="#FFF"
                 android:textSize="@dimen/form" />
         </LinearLayout>

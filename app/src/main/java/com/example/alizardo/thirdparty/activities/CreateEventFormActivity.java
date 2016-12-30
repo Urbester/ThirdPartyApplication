@@ -18,6 +18,7 @@ import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CreateEventFormActivity extends AppCompatActivity {
 
@@ -39,69 +40,78 @@ public class CreateEventFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get all data and send to services
+                try {
+                    String title = (String) ((TextView) findViewById(R.id.NewEventFormName)).getText().toString();
+                    String url = (String) ((TextView) findViewById(R.id.NewEventFormURL)).getText().toString();
+                    String description = (String) ((TextView) findViewById(R.id.NewEventFormDescription)).getText().toString();
+                    String location = (String) ((TextView) findViewById(R.id.NewEventFormLocation)).getText().toString();
+                    int price;
+                    try {
+                        price = Integer.parseInt(((TextView) findViewById(R.id.NewEventFormPrice)).getText().toString());
+                    } catch (Exception e){
+                        price = 0;
+                    }
+                    boolean isPublic = (boolean) ((CheckBox) findViewById(R.id.NewEventFormPublicCheck)).isChecked();
 
-                String title = (String) ((TextView) findViewById(R.id.NewEventFormName)).getText();
-                String description = (String) ((TextView) findViewById(R.id.NewEventFormDescription)).getText();
-                String location = (String) ((TextView) findViewById(R.id.NewEventFormLocation)).getText();
-                int price = Integer.parseInt((String) ((TextView) findViewById(R.id.NewEventFormPrice)).getText());
+                    DatePicker dobPicker = (DatePicker) findViewById(R.id.NewEventFormStartDate);
+                    Integer dobYear = dobPicker.getYear();
+                    Integer dobMonth = dobPicker.getMonth();
+                    Integer dobDate = dobPicker.getDayOfMonth();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());
+                    String startDateDay = sb.toString();
 
-                boolean isPublic = (boolean) (((CheckBox) findViewById(R.id.NewEventFormPublicCheck)).isChecked());
+                    dobPicker = (DatePicker) findViewById(R.id.NewEventFormEndDate);
+                    dobYear = dobPicker.getYear();
+                    dobMonth = dobPicker.getMonth();
+                    dobDate = dobPicker.getDayOfMonth();
+                    sb = new StringBuilder();
+                    sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());
+                    String endDateDay = sb.toString();
 
-                DatePicker dobPicker = (DatePicker) findViewById(R.id.NewEventFormStartDate);
-                Integer dobYear = dobPicker.getYear();
-                Integer dobMonth = dobPicker.getMonth();
-                Integer dobDate = dobPicker.getDayOfMonth();
-                StringBuilder sb = new StringBuilder();
-                sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());
-                String startDateDay = sb.toString();
+                    TimePicker timePicker = (TimePicker) findViewById(R.id.NewEventFormEndDateTime);
+                    int hour = timePicker.getHour();
+                    int minute = timePicker.getMinute();
+                    sb = new StringBuilder();
+                    sb.append(hour).append(":").append(minute);
+                    String endDateTime = sb.toString();
 
-                dobPicker = (DatePicker) findViewById(R.id.NewEventFormEndDate);
-                dobYear = dobPicker.getYear();
-                dobMonth = dobPicker.getMonth();
-                dobDate = dobPicker.getDayOfMonth();
-                sb = new StringBuilder();
-                sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());
-                String endDateDay = sb.toString();
+                    sb = new StringBuilder();
+                    sb.append(endDateDay).append(" ").append(endDateTime).append(":00");
 
-                TimePicker timePicker = (TimePicker) findViewById(R.id.NewEventFormEndDateTime);
-                int hour = timePicker.getHour();
-                int minute = timePicker.getMinute();
-                sb = new StringBuilder();
-                sb.append(hour).append(":").append(minute);
-                String endDateTime = sb.toString();
+                    String endDate = sb.toString();
 
-                sb = new StringBuilder();
-                sb.append(endDateDay).append(" ").append(endDateTime);
+                    timePicker = (TimePicker) findViewById(R.id.NewEventFormStartDateTime);
+                    hour = timePicker.getHour();
+                    minute = timePicker.getMinute();
+                    sb = new StringBuilder();
+                    sb.append(hour).append(":").append(minute);
+                    String startDateTime = sb.toString();
 
-                String endDate = sb.toString();
+                    sb = new StringBuilder();
+                    sb.append(startDateDay).append(" ").append(startDateTime).append(":00");
 
-                timePicker = (TimePicker) findViewById(R.id.NewEventFormStartDateTime);
-                hour = timePicker.getHour();
-                minute = timePicker.getMinute();
-                sb = new StringBuilder();
-                sb.append(hour).append(":").append(minute);
-                String startDateTime = sb.toString();
-
-                sb = new StringBuilder();
-                sb.append(startDateDay).append(" ").append(startDateTime);
-
-                String startDate = sb.toString();
+                    String startDate = sb.toString();
 
 
-                HashMap<String, String> headers = new HashMap<>();
-                HashMap<String, String> payload = new HashMap<>();
+                    HashMap<String, String> headers = new HashMap<>();
+                    HashMap<String, String> payload = new HashMap<>();
 
-                headers.put("X-Auth-Token", basicInfo.getString("AccessToken"));
-                payload.put("Title", title);
-                payload.put("Description", description);
-                payload.put("Location", location);
-                payload.put("Price", String.valueOf(price));
-                payload.put("StartDate", startDate);
-                payload.put("EndDate", endDate);
-                payload.put("Public", String.valueOf(isPublic));
+                    headers.put("X-Auth-Token", basicInfo.getString("AccessToken"));
+                    payload.put("Title", title);
+                    payload.put("Description", description);
+                    payload.put("Local", location);
+                    payload.put("Price", String.valueOf(price));
+                    payload.put("StartDate", startDate);
+                    payload.put("EndDate", endDate);
+                    payload.put("Public", String.valueOf(isPublic));
+                    payload.put("URL", url);
 
-                CreateEvent worker = new CreateEvent();
-                worker.execute("/v1/event", "POST", headers, payload);
+                    CreateEvent worker = new CreateEvent();
+                    worker.execute("/v1/event", "POST", headers, payload);
+                } catch (Exception e) {
+                    Toast.makeText(CreateEventFormActivity.this, "Ops! Bad form.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -109,19 +119,32 @@ public class CreateEventFormActivity extends AppCompatActivity {
 
     class CreateEvent extends AsyncTask<Object, Void, String> {
 
+
+
         protected void onPreExecute() {
             Toast.makeText(CreateEventFormActivity.this, "Creating event...", Toast.LENGTH_SHORT).show();
         }
 
         protected String doInBackground(Object... params) {
+            try{
             Utils util = new Utils();
-            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
+            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);}
+            catch (Exception e){
+                return null;
+            }
         }
 
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Toast.makeText(CreateEventFormActivity.this, "Something wrong happenned. Please try again later.", Toast.LENGTH_SHORT).show();
+        }
 
         protected void onPostExecute(String response) {
-            if (response == null) {
-                Toast.makeText(CreateEventFormActivity.this, "Error creating event. Please check all parameters.", Toast.LENGTH_SHORT).show();
+            if (Objects.equals(response, "") || response == null) {
+                Toast.makeText(CreateEventFormActivity.this, "Service is unavailable. Try again later.", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                return;
             }
             Log.i("response: ", response);
             Utils util = new Utils();

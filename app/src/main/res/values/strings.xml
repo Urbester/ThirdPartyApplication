@@ -28,6 +28,7 @@
     <string name="title_activity_event_overview">Event Overview</string>
     <string name="title_activity_search">Search</string>
     <string name="query">Query</string>
-    <string name="create">Create</string>
-    <string name="eventPublic">public</string>
+    <string name="create">create event</string>
+    <string name="eventPublic">Note: I allow unknown people to ask to join my party.</string>
+    <string name="put_your_image_link_here">Put your image link here !</string>
 </resources>

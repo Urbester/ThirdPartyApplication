@@ -130,8 +130,6 @@ public class LoginRegisterActivity extends Activity {
                 parameters.putString("fields", "id,email,name,picture.type(large)");
                 request.setParameters(parameters);
                 request.executeAsync();
-
-                finish();
             }
 
             @Override

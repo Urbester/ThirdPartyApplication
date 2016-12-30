@@ -123,7 +123,7 @@
                 android:background="@color/primary"
                 android:textColor="#FFF"
                 android:textSize="@dimen/form"
-                android:id="@+id/ButtonSendFeedback"
+                android:id="@+id/createEventButton"
                 android:layout_width="fill_parent"
                 android:layout_marginTop="@dimen/form_bottom_margin"
                 android:layout_marginBottom="@dimen/form_bottom_margin"

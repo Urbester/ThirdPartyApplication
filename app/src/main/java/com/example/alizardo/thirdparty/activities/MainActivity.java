@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         createEventBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplication(), CreateEventFormActivity.class);
+                i.putExtras(basicInfo);
                 startActivity(i);
             }
         });

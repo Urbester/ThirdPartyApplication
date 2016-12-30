@@ -22,7 +22,7 @@ public class Utils {
     private String serverURL;
 
     public Utils() {
-        this.serverURL = "http://10.0.2.2:5000";
+        this.serverURL = "http://thirdparty.thevigilante.xyz:80";
     }
 
     public Utils(String serverURL) {

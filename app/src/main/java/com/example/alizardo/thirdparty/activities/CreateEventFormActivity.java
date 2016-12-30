@@ -69,7 +69,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
 
                     DatePicker dobPicker = (DatePicker) findViewById(R.id.NewEventFormStartDate);
                     Integer dobYear = dobPicker.getYear();
-                    Integer dobMonth = dobPicker.getMonth();
+                    Integer dobMonth = dobPicker.getMonth() + 1;
                     Integer dobDate = dobPicker.getDayOfMonth();
                     StringBuilder sb = new StringBuilder();
                     sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());
@@ -77,7 +77,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
 
                     dobPicker = (DatePicker) findViewById(R.id.NewEventFormEndDate);
                     dobYear = dobPicker.getYear();
-                    dobMonth = dobPicker.getMonth();
+                    dobMonth = dobPicker.getMonth() + 1;
                     dobDate = dobPicker.getDayOfMonth();
                     sb = new StringBuilder();
                     sb.append(dobYear.toString()).append("-").append(dobMonth.toString()).append("-").append(dobDate.toString());

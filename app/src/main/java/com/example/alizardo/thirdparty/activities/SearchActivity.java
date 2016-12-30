@@ -1,9 +1,9 @@
 package com.example.alizardo.thirdparty.activities;
 
-import android.os.Bundle;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.os.Bundle;
 
 import com.example.alizardo.thirdparty.R;
 
@@ -13,19 +13,17 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Search");
+
+
+        // Get the intent, verify the action and get the query
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            doMySearch(query);
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem)
-    {
-        onBackPressed();
-        return true;
+    private void doMySearch(String query) {
+
     }
-
-
-
 }

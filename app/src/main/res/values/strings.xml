@@ -29,4 +29,6 @@
     <string name="title_activity_search">Search</string>
     <string name="query">Query</string>
     <string name="create">Create</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search</string>
 </resources>

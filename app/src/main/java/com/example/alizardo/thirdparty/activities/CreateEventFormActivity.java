@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -43,6 +44,8 @@ public class CreateEventFormActivity extends AppCompatActivity {
                 String description = (String) ((TextView) findViewById(R.id.NewEventFormDescription)).getText();
                 String location = (String) ((TextView) findViewById(R.id.NewEventFormLocation)).getText();
                 int price = Integer.parseInt((String) ((TextView) findViewById(R.id.NewEventFormPrice)).getText());
+
+                boolean isPublic = (boolean) (((CheckBox) findViewById(R.id.NewEventFormPublicCheck)).isChecked());
 
                 DatePicker dobPicker = (DatePicker) findViewById(R.id.NewEventFormStartDate);
                 Integer dobYear = dobPicker.getYear();
@@ -95,6 +98,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
                 payload.put("Price", String.valueOf(price));
                 payload.put("StartDate", startDate);
                 payload.put("EndDate", endDate);
+                payload.put("Public", String.valueOf(isPublic));
 
                 CreateEvent worker = new CreateEvent();
                 worker.execute("/v1/event", "POST", headers, payload);
@@ -113,6 +117,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
             Utils util = new Utils();
             return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
         }
+
 
         protected void onPostExecute(String response) {
             if (response == null) {

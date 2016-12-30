@@ -8,10 +8,10 @@
     tools:context="com.example.alizardo.thirdparty.activities.CreateEventFormActivity">
 
     <ScrollView
-        android:layout_marginLeft="@dimen/form_left_margin"
-        android:layout_marginRight="@dimen/form_right_margin"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/form_left_margin"
+        android:layout_marginRight="@dimen/form_right_margin">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -24,111 +24,126 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/form_bottom_margin"
-                android:textSize="@dimen/form"
-                android:text="Title" />
+                android:text="Title"
+                android:textSize="@dimen/form" />
 
             <EditText
                 android:id="@+id/NewEventFormName"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/form_title"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="@string/form_title"
                 android:inputType="textPersonName" />
+
+            <CheckBox
+                android:id="@+id/NewEventFormPublicCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/eventPublic" />
+
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="Description" />
+                android:text="Description"
+                android:textSize="@dimen/form" />
+
             <EditText
                 android:id="@+id/NewEventFormDescription"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/form_description"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="@string/form_description"
                 android:inputType="textMultiLine"
                 android:lines="2" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="Location" />
+                android:text="Location"
+                android:textSize="@dimen/form" />
+
             <EditText
                 android:id="@+id/NewEventFormLocation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/form_location"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="@string/form_location"
                 android:inputType="text" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="Price" />
+                android:text="Price"
+                android:textSize="@dimen/form" />
+
             <EditText
                 android:id="@+id/NewEventFormPrice"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/form_price"
                 android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="@string/form_price"
                 android:inputType="numberSigned" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="Start Date" />
+                android:text="Start Date"
+                android:textSize="@dimen/form" />
+
             <DatePicker
                 android:id="@+id/NewEventFormStartDate"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="@dimen/form_bottom_margin"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="Start Hour" />
+                android:text="Start Hour"
+                android:textSize="@dimen/form" />
+
             <TimePicker
                 android:id="@+id/NewEventFormStartDateTime"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="@dimen/form_bottom_margin"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="End Date" />
+                android:text="End Date"
+                android:textSize="@dimen/form" />
+
             <DatePicker
                 android:id="@+id/NewEventFormEndDate"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="@dimen/form_bottom_margin"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form"
-                android:text="End Hour" />
+                android:text="End Hour"
+                android:textSize="@dimen/form" />
+
             <TimePicker
                 android:id="@+id/NewEventFormEndDateTime"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="@dimen/form_bottom_margin"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin" />
 
             <Button
-                android:background="@color/primary"
-                android:textColor="#FFF"
-                android:textSize="@dimen/form"
                 android:id="@+id/createEventButton"
                 android:layout_width="fill_parent"
-                android:layout_marginTop="@dimen/form_bottom_margin"
-                android:layout_marginBottom="@dimen/form_bottom_margin"
                 android:layout_height="wrap_content"
-                android:text="@string/create" />
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:layout_marginTop="@dimen/form_bottom_margin"
+                android:background="@color/primary"
+                android:text="@string/create"
+                android:textColor="#FFF"
+                android:textSize="@dimen/form" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

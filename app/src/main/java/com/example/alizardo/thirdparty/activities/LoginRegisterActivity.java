@@ -36,6 +36,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by alizardo on 27/12/2016.
@@ -163,7 +164,7 @@ public class LoginRegisterActivity extends Activity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
 
             }
         }, 2000);
@@ -176,13 +177,20 @@ public class LoginRegisterActivity extends Activity {
         }
 
         protected String doInBackground(Object... params) {
-            Utils util = new Utils();
-            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
+            try {
+                Utils util = new Utils();
+                return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
+            } catch (Exception e) {
+                return null;
+            }
         }
 
         protected void onPostExecute(String response) {
-            if (response == null) {
+            if (response == null || Objects.equals(response, "")) {
                 response = "THERE WAS AN ERROR";
+                Toast.makeText(LoginRegisterActivity.this, "Service is unavailable. Try again later.", Toast.LENGTH_SHORT).show();
+                LoginManager.getInstance().logOut();
+                return;
             }
             Log.i("response: ", response);
             Utils util = new Utils();

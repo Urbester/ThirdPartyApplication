@@ -42,9 +42,23 @@ public class CreateEventFormActivity extends AppCompatActivity {
                 // Get all data and send to services
                 try {
                     String title = (String) ((TextView) findViewById(R.id.NewEventFormName)).getText().toString();
+
+                    if(title.length() == 0){
+                        Toast.makeText(CreateEventFormActivity.this, "Bad title.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     String url = (String) ((TextView) findViewById(R.id.NewEventFormURL)).getText().toString();
                     String description = (String) ((TextView) findViewById(R.id.NewEventFormDescription)).getText().toString();
+                    if(description.length() == 0){
+                        Toast.makeText(CreateEventFormActivity.this, "Bad description.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     String location = (String) ((TextView) findViewById(R.id.NewEventFormLocation)).getText().toString();
+                    if(location.length() == 0){
+                        Toast.makeText(CreateEventFormActivity.this, "Bad location.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     int price;
                     try {
                         price = Integer.parseInt(((TextView) findViewById(R.id.NewEventFormPrice)).getText().toString());

@@ -29,12 +29,21 @@ public class Utils {
         this.serverURL = "http://" + serverURL;
     }
 
-    public String requestGET(String route) {
+    public String requestGET(String route, HashMap headers) {
         String line = "";
         try {
             URL url = new URL(this.serverURL + route);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+
+            // Add headers
+            Iterator it = headers.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry) it.next();
+                urlConnection.setRequestProperty((String) pair.getKey(), (String) pair.getValue());
+                it.remove();
+            }
+
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 line = bufferedReader.readLine();

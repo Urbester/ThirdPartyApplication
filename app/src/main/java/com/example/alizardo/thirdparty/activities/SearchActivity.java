@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Search");
 
+
         listView = (ListView) findViewById(R.id.listView);
 
         JSONArray jsonArray = null;
@@ -72,7 +73,6 @@ public class SearchActivity extends AppCompatActivity {
 
         myAppAdapter = new MyAppAdapter(myDataset, SearchActivity.this);
         listView.setAdapter(myAppAdapter);
-
     }
 
 
@@ -132,29 +132,6 @@ public class SearchActivity extends AppCompatActivity {
             this.mRecyclerView.setAdapter(this.mAdapter);
 
             return rowView;
-
-            /*
-            View rowView = convertView;
-            ViewHolder viewHolder;
-
-            if (rowView == null) {
-                LayoutInflater inflater = getLayoutInflater();
-                rowView = inflater.inflate(R.layout.item_search, null);
-
-                // configure view holder
-                viewHolder = new ViewHolder();
-                viewHolder.txtTitle = (TextView) rowView.findViewById(R.id.title);
-                viewHolder.txtSubTitle = (TextView) rowView.findViewById(R.id.subtitle);
-                rowView.setTag(viewHolder);
-
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-
-            viewHolder.txtTitle.setText(parkingList.get(position).getTitle() + "");
-            viewHolder.txtSubTitle.setText(parkingList.get(position).getHost() + "");
-            return rowView;
-*/
 
         }
 

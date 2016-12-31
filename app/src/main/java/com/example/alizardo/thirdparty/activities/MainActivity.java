@@ -177,12 +177,13 @@ public class MainActivity extends AppCompatActivity {
                 showEvents(menuItem, mDrawer);
                 break;
             case R.id.nav_third_activity:
-                search(menuItem,mDrawer);
-                break;
-            default:
-                discover(menuItem, mDrawer);
                 Intent intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
+                return;
+
+            default:
+                discover(menuItem, mDrawer);
+
                 break;
         }
         return;

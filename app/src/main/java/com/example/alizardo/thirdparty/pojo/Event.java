@@ -7,27 +7,52 @@ package com.example.alizardo.thirdparty.pojo;
 public class Event {
 
     private String title;
-    private String host;
     private String description;
     private String startDate;
     private String endDate;
-    private String numGuests;
+    private String maxGuests;
     private String url;
     private String local;
+    private String slotsLeft;
+    private String hostName;
+    private String hostEmail;
+    private String hostURL;
+    private String id;
 
     public Event() {
 
     }
 
-    public Event(String title, String host, String local, String description, String startDate, String endDate, String numGuests, String url) {
-        this.host = host;
+    public Event(String title, String local, String description, String startDate,
+                 String endDate, String maxGuests, String url, String slotsLeft, String hostName, String hostEmail, String hostURL, String id) {
         this.title = title;
         this.local = local;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.numGuests = numGuests;
+        this.maxGuests = maxGuests;
         this.url = url;
+        this.slotsLeft = slotsLeft;
+        this.hostEmail = hostEmail;
+        this.hostName = hostName;
+        this.id = id;
+        this.hostURL = hostURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMaxGuests() {
+        return maxGuests;
+    }
+
+    public void setMaxGuests(String maxGuests) {
+        this.maxGuests = maxGuests;
     }
 
     public String getLocal() {
@@ -70,12 +95,13 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public String getNumGuests() {
-        return numGuests;
+    public String getSlotsLeft() {
+
+        return slotsLeft;
     }
 
-    public void setNumGuests(String numGuests) {
-        this.numGuests = numGuests;
+    public void setSlotsLeft(String slotsLeft) {
+        this.slotsLeft = slotsLeft;
     }
 
     public String getUrl() {
@@ -86,11 +112,28 @@ public class Event {
         this.url = url;
     }
 
-    public String getHost() {
-        return host;
+
+    public String getHostName() {
+        return hostName;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public String getHostEmail() {
+        return hostEmail;
+    }
+
+    public void setHostEmail(String hostEmail) {
+        this.hostEmail = hostEmail;
+    }
+
+    public String getHostURL() {
+        return hostURL;
+    }
+
+    public void setHostURL(String hostURL) {
+        this.hostURL = hostURL;
     }
 }

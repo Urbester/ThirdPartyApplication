@@ -86,7 +86,7 @@ public class SearchFragment extends Fragment {
         String myStaticName = "Amaral";
         List<Event> eventsHostedByMe = new ArrayList<>();
         for(Event currentEvent : myDataset){
-            if(currentEvent.getHost().equals(myStaticName)){
+            if(eventsHostedByMe.equals(myStaticName)){
                 eventsHostedByMe.add(currentEvent);
             }
         }

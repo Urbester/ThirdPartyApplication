@@ -11,9 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.libs.Utils;
 import com.example.alizardo.thirdparty.pojo.Event;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +41,20 @@ public class EventsTabFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
+    private JSONObject data;
     private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
+
+
 
     public EventsTabFragment() {
         // Required empty public constructor
     }
 
-    public static EventsTabFragment newInstance(int page) {
+    public static EventsTabFragment newInstance(JSONObject data) {
         EventsTabFragment fragment = new EventsTabFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE_NUMBER, page);
+        args.putString("events", data.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,23 +62,41 @@ public class EventsTabFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        if (getArguments() != null){
+            try {
+                this.data = new JSONObject(getArguments().getString("events"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_events_tab, container, false);
-
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_discover, container, false);
 
         this.mRecyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 
-        // Initialize dummy data
+        Utils u = new Utils();
+
+        JSONArray jsonArray = null;
         List<Event> myDataset = new ArrayList<>();
-        myDataset.add(new Event("Passagem de Ano no Choupal", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
+        try {
+            jsonArray = this.data.getJSONArray("Result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject explrObject = jsonArray.getJSONObject(i);
+                // String title, String host, String description, String startDate, String endDate, String numGuests, String url
+                Event e = new Event(explrObject.get("title").toString(), explrObject.get("host").toString(), explrObject.get("local").toString(),
+                        explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
+                        "10", explrObject.get("URL").toString());
+                myDataset.add(e);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // specify an adapter
         this.mAdapter = new MyAdapter(myDataset);

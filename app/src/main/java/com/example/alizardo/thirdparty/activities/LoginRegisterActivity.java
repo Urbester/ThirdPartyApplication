@@ -172,10 +172,12 @@ public class LoginRegisterActivity extends Activity {
 
     class CreateAccount extends AsyncTask<Object, Void, String> {
 
+        @Override
         protected void onPreExecute() {
             Log.i("STATUS", "Starting GET request...");
         }
 
+        @Override
         protected String doInBackground(Object... params) {
             try {
                 Utils util = new Utils();
@@ -185,6 +187,7 @@ public class LoginRegisterActivity extends Activity {
             }
         }
 
+        @Override
         protected void onPostExecute(String response) {
             if (response == null || Objects.equals(response, "")) {
                 response = "THERE WAS AN ERROR";

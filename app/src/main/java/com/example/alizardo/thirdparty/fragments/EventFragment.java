@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.adapters.MyAdapter;
 import com.example.alizardo.thirdparty.adapters.TabsPagerAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -25,14 +28,10 @@ import com.example.alizardo.thirdparty.adapters.TabsPagerAdapter;
  * create an instance of this fragment.
  */
 public class EventFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private JSONObject data;
+    private JSONObject pending, rejected, invited, hosting;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,14 +42,16 @@ public class EventFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     public EventFragment() {
-        // Required empty public constructor
     }
 
-    public static EventFragment newInstance(String param1, String param2) {
+    public static EventFragment newInstance(JSONObject pending,
+                                            JSONObject hosting, JSONObject invited, JSONObject rejected) {
         EventFragment fragment = new EventFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("pending", pending.toString());
+        args.putString("hosting", hosting.toString());
+        args.putString("invited", invited.toString());
+        args.putString("rejected", rejected.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +60,14 @@ public class EventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            try {
+                this.pending = new JSONObject(getArguments().getString("pending"));
+                this.hosting = new JSONObject(getArguments().getString("hosting"));
+                this.rejected = new JSONObject(getArguments().getString("rejected"));
+                this.invited = new JSONObject(getArguments().getString("invited"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -74,7 +81,8 @@ public class EventFragment extends Fragment {
         setupTablayout(v);
 
         final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
-        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext());
+        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext(),
+                this.pending, this.rejected, this.invited, this.hosting);
 
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
@@ -113,7 +121,6 @@ public class EventFragment extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
 
 
         return v;
@@ -163,4 +170,6 @@ public class EventFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

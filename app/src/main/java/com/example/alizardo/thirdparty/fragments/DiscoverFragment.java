@@ -11,9 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.libs.Utils;
 import com.example.alizardo.thirdparty.pojo.Event;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,30 +35,19 @@ public class DiscoverFragment extends Fragment {
 
     TabLayout tabLayout;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private JSONObject data;
 
     private OnFragmentInteractionListener mListener;
 
     public DiscoverFragment() {
         // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DiscoverFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DiscoverFragment newInstance(String param1, String param2) {
+    public static DiscoverFragment newInstance(JSONObject data) {
         DiscoverFragment fragment = new DiscoverFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("events", data.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,8 +56,11 @@ public class DiscoverFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            try {
+                this.data = new JSONObject(getArguments().getString("events"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -76,10 +73,23 @@ public class DiscoverFragment extends Fragment {
 
         this.mRecyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 
-        // Initialize dummy data
+        Utils u = new Utils();
+
+        JSONArray jsonArray = null;
         List<Event> myDataset = new ArrayList<>();
-        myDataset.add(new Event("Passagem de Ano no Choupal", "Lizardo", "Marina e Imperial na casa do Lizardo", "12/01/2017 18:30", "12/01/2017 20:30", "10", "https://www.papodebar.com/wp-content/uploads/2015/05/drinks.jpg"));
-        myDataset.add(new Event("Feiras Novas 2017", "Eduardo", "Festas de Ponte de Lima com Vinhaça da boa", "12/01/2017 18:30", "12/01/2017 20:30", "16", "http://www.cm-pontedelima.pt/imagens/noticias/setembro2011/Feiras_Novas_2011_Noite2.jpg"));
+        try {
+            jsonArray = this.data.getJSONArray("Result");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject explrObject = jsonArray.getJSONObject(i);
+                // String title, String host, String description, String startDate, String endDate, String numGuests, String url
+                Event e = new Event(explrObject.get("title").toString(), explrObject.get("host").toString(), explrObject.get("local").toString(),
+                        explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
+                        "10", explrObject.get("URL").toString());
+                myDataset.add(e);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // specify an adapter
         this.mAdapter = new MyAdapter(myDataset);

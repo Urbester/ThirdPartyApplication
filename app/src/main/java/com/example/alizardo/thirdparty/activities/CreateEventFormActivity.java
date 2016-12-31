@@ -16,7 +16,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("New Party");
+        setTitle("Search");
     }
 
     @Override

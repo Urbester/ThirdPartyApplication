@@ -171,8 +171,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_second_fragment:
                 fragmentClass = EventFragment.class;
                 break;
+            case R.id.nav_third_activity:
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                return;
+
             default:
                 fragmentClass = DiscoverFragment.class;
+                break;
         }
 
         try {

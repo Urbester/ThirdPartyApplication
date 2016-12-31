@@ -176,8 +176,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_second_fragment:
                 showEvents(menuItem, mDrawer);
                 break;
+            case R.id.nav_third_activity:
+                search(menuItem,mDrawer);
+                break;
             default:
                 discover(menuItem, mDrawer);
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
                 break;
         }
         return;
@@ -199,6 +204,14 @@ public class MainActivity extends AppCompatActivity {
 
         headers.put("X-Auth-Token", facebook_user_token);
         new GetPublicEvents(m, d).execute("/v1/event/list/public", headers, payload);
+    }
+
+    private void search(MenuItem m, DrawerLayout d) {
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", facebook_user_token);
+        new GetSearchEvents(m, d).execute("/v1/event/list/public", headers, payload);
     }
 
 
@@ -345,6 +358,64 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response) {
             pending(facebook_user_token);
+        }
+    }
+
+    class GetSearchEvents extends AsyncTask<Object, Void, String> {
+        private SearchActivity searchActivity;
+        private MenuItem menuItem;
+        private DrawerLayout mDrawer;
+
+        public GetSearchEvents(MenuItem m, DrawerLayout d) {
+            super();
+            this.menuItem = m;
+            this.mDrawer = d;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(MainActivity.this, "Getting set", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                response = "THERE WAS AN ERROR";
+                Toast.makeText(MainActivity.this, "Service is unavailable. Try again later.", Toast.LENGTH_SHORT).show();
+                LoginManager.getInstance().logOut();
+                return;
+            }
+
+            Log.i("response: ", response);
+            Utils util = new Utils();
+
+
+            JSONObject map = null;
+            try {
+                map = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            // Highlight the selected item has been done by NavigationView
+            menuItem.setChecked(true);
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
+            return;
         }
     }
 

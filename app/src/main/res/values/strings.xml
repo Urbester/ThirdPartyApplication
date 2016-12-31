@@ -31,4 +31,5 @@
     <string name="create">create event</string>
     <string name="eventPublic">Note: I allow unknown people to ask to join my party.</string>
     <string name="put_your_image_link_here">Put your image link here !</string>
+    <string name="search_hint">Search something</string>
 </resources>

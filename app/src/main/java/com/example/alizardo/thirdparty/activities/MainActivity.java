@@ -189,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", facebook_user_token);
-        GetEvents evt = new GetEvents(m, d);
-        evt.execute("/v1/event/list/public", "GET", headers, payload);
+        new GetEvents(m, d).execute("/v1/event/list/public", "GET", headers, payload);
     }
 
 
@@ -199,8 +198,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", facebook_user_token);
-        GetPublicEvents discover = new GetPublicEvents(m, d);
-        discover.execute("/v1/event/list/public", headers, payload);
+        new GetPublicEvents(m, d).execute("/v1/event/list/public", headers, payload);
     }
 
 
@@ -357,8 +355,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        GetPendingEvents discover = new GetPendingEvents();
-        discover.execute("/v1/event/list/pending", headers, payload);
+        new GetPendingEvents().execute("/v1/event/list/pending", headers, payload);
     }
 
     class GetPendingEvents extends AsyncTask<Object, Void, String> {
@@ -405,8 +402,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        GetInvitedEvents worker = new GetInvitedEvents();
-        worker.execute("/v1/event/list/invited", headers, payload);
+        new GetInvitedEvents().execute("/v1/event/list/invited", headers, payload);
     }
 
     class GetInvitedEvents extends AsyncTask<Object, Void, String> {
@@ -454,8 +450,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        GetHostingEvents worker = new GetHostingEvents();
-        worker.execute("/v1/event/list/hosting", headers, payload);
+        new GetHostingEvents().execute("/v1/event/list/hosting", headers, payload);
     }
 
     class GetHostingEvents extends AsyncTask<Object, Void, String> {
@@ -502,8 +497,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        GetRejectedEvents worker = new GetRejectedEvents();
-        worker.execute("/v1/event/list/rejected", headers, payload);
+        new GetRejectedEvents().execute("/v1/event/list/rejected", headers, payload);
     }
 
     class GetRejectedEvents extends AsyncTask<Object, Void, String> {

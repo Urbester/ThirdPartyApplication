@@ -58,6 +58,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.endDate = (TextView) v.findViewById(R.id.endDate);
         this.maxGuests = (TextView) v.findViewById(R.id.maxGuests);
         this.slotsLeft = (TextView) v.findViewById(R.id.slotsLeft);
+
         this.url = (ImageView) v.findViewById(R.id.pic);
 
         this.host.setText(b.getString("host"));

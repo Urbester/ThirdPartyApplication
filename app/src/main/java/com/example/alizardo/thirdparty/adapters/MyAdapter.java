@@ -52,7 +52,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     Bundle b = new Bundle();
                     int pos =  (int) v.findViewById(R.id.title).getTag();
                     b.putString("title", mDataset.get(pos).getTitle());
-                    b.putString("host", mDataset.get(pos).getHost());
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());
                     b.putString("endDate", mDataset.get(pos).getEndDate());

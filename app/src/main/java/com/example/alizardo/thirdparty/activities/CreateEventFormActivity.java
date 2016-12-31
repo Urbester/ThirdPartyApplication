@@ -120,6 +120,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
                     HashMap<String, String> payload = new HashMap<>();
 
                     headers.put("X-Auth-Token", basicInfo.getString("AccessToken"));
+
                     payload.put("Title", title);
                     payload.put("Description", description);
                     payload.put("Local", location);

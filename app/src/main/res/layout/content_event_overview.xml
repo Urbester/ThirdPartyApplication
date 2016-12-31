@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/form_bottom_margin"
             android:layout_marginLeft="@dimen/form_left_margin"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/userDetailPic"
@@ -35,7 +36,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginLeft="@dimen/form_left_margin"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/userDetailName"
@@ -47,33 +49,9 @@
                     android:id="@+id/userDetailEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/form_small" />
+                    android:textSize="@dimen/emailsize" />
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hostLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/form_bottom_margin"
-            android:layout_marginLeft="@dimen/form_left_margin"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/hostTXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Host"
-                android:textSize="@dimen/form"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/host"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/form_small" />
 
         </LinearLayout>
 
@@ -81,7 +59,7 @@
             android:id="@+id/descriptionLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hostLayout"
+            android:layout_below="@id/userDetailLayout"
             android:layout_marginBottom="@dimen/form_bottom_margin"
             android:layout_marginLeft="@dimen/form_left_margin"
             android:orientation="vertical">
@@ -200,7 +178,7 @@
                 android:id="@+id/slotsLeftTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max Guests: "
+                android:text="Slots left: "
                 android:textSize="@dimen/form"
                 android:textStyle="bold" />
 
@@ -210,6 +188,50 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/form_small" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabInvite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/account_plus" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/pencil_circle" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabAccepted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/account_multiple" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/delete_forever" />
+
 
         </LinearLayout>
 

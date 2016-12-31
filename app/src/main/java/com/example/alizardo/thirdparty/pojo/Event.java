@@ -7,7 +7,6 @@ package com.example.alizardo.thirdparty.pojo;
 public class Event {
 
     private String title;
-    private String host;
     private String description;
     private String startDate;
     private String endDate;
@@ -18,14 +17,14 @@ public class Event {
     private String hostName;
     private String hostEmail;
     private String hostURL;
+    private String id;
 
     public Event() {
 
     }
 
-    public Event(String title, String host, String local, String description, String startDate,
-                 String endDate, String maxGuests, String url, String slotsLeft, String hostName, String hostEmail, String hostURL) {
-        this.host = host;
+    public Event(String title, String local, String description, String startDate,
+                 String endDate, String maxGuests, String url, String slotsLeft, String hostName, String hostEmail, String hostURL, String id) {
         this.title = title;
         this.local = local;
         this.description = description;
@@ -36,7 +35,16 @@ public class Event {
         this.slotsLeft = slotsLeft;
         this.hostEmail = hostEmail;
         this.hostName = hostName;
+        this.id = id;
         this.hostURL = hostURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMaxGuests() {
@@ -104,13 +112,6 @@ public class Event {
         this.url = url;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
 
     public String getHostName() {
         return hostName;

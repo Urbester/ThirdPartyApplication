@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 
 public class EventOverviewActivity extends AppCompatActivity {
 
-    private TextView host;
     private TextView description;
     private TextView startDate;
     private TextView endDate;
@@ -39,6 +38,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,6 @@ public class EventOverviewActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
 
-        this.host = (TextView) v.findViewById(R.id.host);
         this.description = (TextView) v.findViewById(R.id.description);
         this.startDate = (TextView) v.findViewById(R.id.startDate);
         this.endDate = (TextView) v.findViewById(R.id.endDate);
@@ -69,7 +68,6 @@ public class EventOverviewActivity extends AppCompatActivity {
 
         this.url = (ImageView) v.findViewById(R.id.pic);
 
-        this.host.setText(b.getString("host"));
         this.description.setText(b.getString("description"));
         this.startDate.setText(b.getString("startDate"));
         this.endDate.setText(b.getString("endDate"));

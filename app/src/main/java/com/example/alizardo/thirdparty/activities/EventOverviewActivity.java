@@ -39,15 +39,60 @@ public class EventOverviewActivity extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton askToJoin = (FloatingActionButton) findViewById(R.id.fab);
+        askToJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "You asked to join the party!!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.fab);
                 btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accept)));
                 btn.setImageResource(R.drawable.check_circle);
+                //TODO: ASYNC TASK
+
+
+
+            }
+        });
+
+
+        FloatingActionButton inviteUsers = (FloatingActionButton) findViewById(R.id.fabInvite);
+        inviteUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: ASYNC TASK to activity with all users to invite
+
+            }
+        });
+
+
+        FloatingActionButton editParty = (FloatingActionButton) findViewById(R.id.fabEdit);
+        editParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Not implemented yet.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+            }
+        });
+
+        FloatingActionButton acceptedRequests = (FloatingActionButton) findViewById(R.id.fabAccepted);
+        acceptedRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: ASYNC TASK to activity with all users accepted
+
+            }
+        });
+
+
+
+        FloatingActionButton deleteParty = (FloatingActionButton) findViewById(R.id.fabDelete);
+        deleteParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: ASYNC TASK to delete activity and return to main activity
+
             }
         });
 

@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(MainActivity.this, "Discovering", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Getting events.", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -392,6 +392,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            Log.e("Pending", response);
 
             invited(facebook_user_token);
         }
@@ -435,12 +436,12 @@ public class MainActivity extends AppCompatActivity {
 
             JSONObject map = null;
             try {
-                pending = new JSONObject(response);
+                invited = new JSONObject(response);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            Log.e("ERRROROR", response);
+            Log.e("Invited", response);
             hosting(facebook_user_token);
 
         }
@@ -484,12 +485,12 @@ public class MainActivity extends AppCompatActivity {
 
             JSONObject map = null;
             try {
-                pending = new JSONObject(response);
+                hosting = new JSONObject(response);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            Log.e("ERRROROR", response);
+            Log.e("Hosting", response);
             rejected(facebook_user_token);
         }
     }
@@ -532,11 +533,11 @@ public class MainActivity extends AppCompatActivity {
 
             JSONObject map = null;
             try {
-                pending = new JSONObject(response);
+                rejected = new JSONObject(response);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("ERRROROR", response);
+            Log.e("Rejected", response);
 
             // call fragment
             EventFragment fragment = EventFragment.newInstance(pending, hosting, invited, rejected);

@@ -44,6 +44,7 @@ public class EventsTabFragment extends Fragment {
     private JSONObject data;
     private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
+    private int page;
 
 
 
@@ -51,10 +52,11 @@ public class EventsTabFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static EventsTabFragment newInstance(JSONObject data) {
+    public static EventsTabFragment newInstance(JSONObject data, int page) {
         EventsTabFragment fragment = new EventsTabFragment();
         Bundle args = new Bundle();
         args.putString("events", data.toString());
+        args.putInt(ARG_PAGE_NUMBER, page);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,6 +66,7 @@ public class EventsTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
             try {
+
                 this.data = new JSONObject(getArguments().getString("events"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -74,9 +77,9 @@ public class EventsTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        this.page = getArguments().getInt(ARG_PAGE_NUMBER, -1);
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_discover, container, false);
+        View v = inflater.inflate(R.layout.fragment_events_tab, container, false);
 
         this.mRecyclerView = (RecyclerView) v.findViewById(R.id.my_recycler_view);
 

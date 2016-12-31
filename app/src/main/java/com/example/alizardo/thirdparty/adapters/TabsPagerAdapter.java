@@ -19,7 +19,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
 
     public TabsPagerAdapter(FragmentManager fm, Context context, JSONObject pending,
-                            JSONObject hosting, JSONObject invited, JSONObject rejected) {
+                            JSONObject rejected, JSONObject invited, JSONObject hosting) {
         super(fm);
         this.context = context;
         this.pending = pending;
@@ -32,15 +32,15 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return EventsTabFragment.newInstance(pending);
+                return EventsTabFragment.newInstance(pending, position + 1);
             case 1:
-                return EventsTabFragment.newInstance(invited);
+                return EventsTabFragment.newInstance(invited, position + 1);
             case 2:
-                return EventsTabFragment.newInstance(hosting);
+                return EventsTabFragment.newInstance(hosting, position + 1);
             case 3:
-                return EventsTabFragment.newInstance(rejected);
+                return EventsTabFragment.newInstance(rejected, position + 1);
             default:
-                return EventsTabFragment.newInstance(pending);
+                return EventsTabFragment.newInstance(pending, position + 1);
         }
     }
 

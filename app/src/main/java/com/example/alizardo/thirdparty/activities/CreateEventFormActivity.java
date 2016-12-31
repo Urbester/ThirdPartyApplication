@@ -65,6 +65,14 @@ public class CreateEventFormActivity extends AppCompatActivity {
                     } catch (Exception e){
                         price = 0;
                     }
+
+                    int max_guests;
+                    try {
+                        max_guests = Integer.parseInt(((TextView) findViewById(R.id.NewEventFormMaxGuests)).getText().toString());
+                    } catch (Exception e){
+                        max_guests = 0;
+                    }
+
                     boolean isPublic = (boolean) ((CheckBox) findViewById(R.id.NewEventFormPublicCheck)).isChecked();
 
                     DatePicker dobPicker = (DatePicker) findViewById(R.id.NewEventFormStartDate);
@@ -118,6 +126,7 @@ public class CreateEventFormActivity extends AppCompatActivity {
                     payload.put("Price", String.valueOf(price));
                     payload.put("StartDate", startDate);
                     payload.put("EndDate", endDate);
+                    payload.put("MaxGuests", String.valueOf(max_guests));
                     payload.put("Public", String.valueOf(isPublic));
                     payload.put("URL", url);
 

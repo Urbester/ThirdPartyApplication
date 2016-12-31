@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 
 public class EventOverviewActivity extends AppCompatActivity {
 
-    private TextView title;
     private TextView host;
     private TextView description;
     private TextView startDate;
@@ -34,11 +33,24 @@ public class EventOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.fab);
+                btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accept)));
+                btn.setImageResource(R.drawable.check_circle);
+            }
+        });
+
+
         View v = (View) findViewById(R.id.content_event_overview);
 
         Bundle b = getIntent().getExtras();
 
-        this.title = (TextView) v.findViewById(R.id.title);
         this.host = (TextView) v.findViewById(R.id.host);
         this.description = (TextView) v.findViewById(R.id.description);
         this.startDate = (TextView) v.findViewById(R.id.startDate);
@@ -56,18 +68,6 @@ public class EventOverviewActivity extends AppCompatActivity {
         Picasso.with(context).load(b.getString("url")).into(this.url);
 
         setTitle(b.getString("title"));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.fab);
-                btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accept)));
-                btn.setImageResource(R.drawable.check_circle);
-            }
-        });
     }
 
 

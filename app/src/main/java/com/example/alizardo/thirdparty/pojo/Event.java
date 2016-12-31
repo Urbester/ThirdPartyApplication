@@ -13,19 +13,29 @@ public class Event {
     private String endDate;
     private String numGuests;
     private String url;
+    private String local;
 
     public Event() {
 
     }
 
-    public Event(String title, String host, String description, String startDate, String endDate, String numGuests, String url) {
+    public Event(String title, String host, String local, String description, String startDate, String endDate, String numGuests, String url) {
         this.host = host;
         this.title = title;
+        this.local = local;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.numGuests = numGuests;
         this.url = url;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     public String getTitle() {

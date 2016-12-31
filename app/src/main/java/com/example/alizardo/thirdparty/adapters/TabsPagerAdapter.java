@@ -8,18 +8,40 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.fragments.EventsTabFragment;
 
+import org.json.JSONObject;
+
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
-    public TabsPagerAdapter(FragmentManager fm, Context context) {
+
+    private JSONObject pending, rejected, invited, hosting;
+
+
+    public TabsPagerAdapter(FragmentManager fm, Context context, JSONObject pending,
+                            JSONObject rejected, JSONObject invited, JSONObject hosting) {
         super(fm);
         this.context = context;
+        this.pending = pending;
+        this.hosting = hosting;
+        this.rejected = rejected;
+        this.invited = invited;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return EventsTabFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+                return EventsTabFragment.newInstance(pending, position + 1);
+            case 1:
+                return EventsTabFragment.newInstance(invited, position + 1);
+            case 2:
+                return EventsTabFragment.newInstance(hosting, position + 1);
+            case 3:
+                return EventsTabFragment.newInstance(rejected, position + 1);
+            default:
+                return EventsTabFragment.newInstance(pending, position + 1);
+        }
     }
 
     @Override
@@ -30,7 +52,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         String output;
-        switch (position){
+        switch (position) {
             case 0:
                 output = context.getResources().getString(R.string.myevents_tab_pending);
                 break;
@@ -50,4 +72,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         }
         return output;
     }
+
+
 }

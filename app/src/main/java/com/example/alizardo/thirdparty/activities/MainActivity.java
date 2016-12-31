@@ -3,16 +3,17 @@ package com.example.alizardo.thirdparty.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +24,19 @@ import android.widget.Toast;
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.fragments.DiscoverFragment;
 import com.example.alizardo.thirdparty.fragments.EventFragment;
+import com.example.alizardo.thirdparty.libs.Utils;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private String name;
     private String user_image_url;
     private Bundle basicInfo;
+
+    private JSONObject pending, rejected, invited, hosting;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -109,19 +119,7 @@ public class MainActivity extends AppCompatActivity {
         TextView name = (TextView) headerLayout.findViewById(R.id.name_text_view);
         name.setText(this.name);
 
-        /* Start Discover Fragment */
-        Class fragmentClass = DiscoverFragment.class;
-        try {
-            Fragment discover = (Fragment) fragmentClass.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, discover).commit();
-            setTitle("Discover");
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
+        discover(nvDrawer.getMenu().getItem(0), mDrawer);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -171,35 +169,36 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                fragmentClass = DiscoverFragment.class;
+                discover(menuItem, mDrawer);
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = EventFragment.class;
+                showEvents(menuItem, mDrawer);
                 break;
             default:
-                fragmentClass = DiscoverFragment.class;
+                discover(menuItem, mDrawer);
+                break;
         }
+        return;
+    }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    // TODO: Not implemented
+    private void showEvents(MenuItem m, DrawerLayout d) {
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
 
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        headers.put("X-Auth-Token", facebook_user_token);
+        new GetEvents(m, d).execute("/v1/event/list/public", "GET", headers, payload);
+    }
 
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
+
+    private void discover(MenuItem m, DrawerLayout d) {
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", facebook_user_token);
+        new GetPublicEvents(m, d).execute("/v1/event/list/public", headers, payload);
     }
 
 
@@ -254,10 +253,300 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
 
             }
         }, 2000);
+    }
+
+    class GetPublicEvents extends AsyncTask<Object, Void, String> {
+        private DiscoverFragment fragment;
+        private MenuItem menuItem;
+        private DrawerLayout mDrawer;
+
+        public GetPublicEvents(MenuItem m, DrawerLayout d) {
+            super();
+            this.menuItem = m;
+            this.mDrawer = d;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(MainActivity.this, "Discovering", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                response = "THERE WAS AN ERROR";
+                Toast.makeText(MainActivity.this, "Service is unavailable. Try again later.", Toast.LENGTH_SHORT).show();
+                LoginManager.getInstance().logOut();
+                return;
+            }
+
+            Log.i("response: ", response);
+            Utils util = new Utils();
+
+
+            JSONObject map = null;
+            try {
+                map = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            fragment = DiscoverFragment.newInstance(map);
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+            // Highlight the selected item has been done by NavigationView
+            menuItem.setChecked(true);
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
+            return;
+        }
+    }
+
+    class GetEvents extends AsyncTask<Object, Void, String> {
+        private EventFragment fragment;
+        private MenuItem menuItem;
+        private DrawerLayout mDrawer;
+
+        public GetEvents(MenuItem m, DrawerLayout d) {
+            super();
+            this.menuItem = m;
+            this.mDrawer = d;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(MainActivity.this, "Getting events.", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            pending(facebook_user_token);
+        }
+    }
+
+
+    private void pending(String accessToken) {
+
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", accessToken);
+        new GetPendingEvents().execute("/v1/event/list/pending", headers, payload);
+    }
+
+    class GetPendingEvents extends AsyncTask<Object, Void, String> {
+
+        public GetPendingEvents() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+            try {
+                pending = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.e("Pending", response);
+
+            invited(facebook_user_token);
+        }
+    }
+
+
+    private void invited(String accessToken) {
+
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", accessToken);
+        new GetInvitedEvents().execute("/v1/event/list/invited", headers, payload);
+    }
+
+    class GetInvitedEvents extends AsyncTask<Object, Void, String> {
+
+        public GetInvitedEvents() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+            try {
+                invited = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.e("Invited", response);
+            hosting(facebook_user_token);
+
+        }
+    }
+
+
+    private void hosting(String accessToken) {
+
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", accessToken);
+        new GetHostingEvents().execute("/v1/event/list/hosting", headers, payload);
+    }
+
+    class GetHostingEvents extends AsyncTask<Object, Void, String> {
+
+        public GetHostingEvents() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+            try {
+                hosting = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.e("Hosting", response);
+            rejected(facebook_user_token);
+        }
+    }
+
+
+    private void rejected(String accessToken) {
+
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", accessToken);
+        new GetRejectedEvents().execute("/v1/event/list/rejected", headers, payload);
+    }
+
+    class GetRejectedEvents extends AsyncTask<Object, Void, String> {
+
+        public GetRejectedEvents() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+            try {
+                rejected = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.e("Rejected", response);
+
+            // call fragment
+            EventFragment fragment = EventFragment.newInstance(pending, hosting, invited, rejected);
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+            // Highlight the selected item has been done by NavigationView
+            nvDrawer.getMenu().getItem(1).setChecked(true);
+            // Set action bar title
+            setTitle(nvDrawer.getMenu().getItem(1).getTitle());
+            // Close the navigation drawer
+            mDrawer.closeDrawers();
+        }
     }
 
 }

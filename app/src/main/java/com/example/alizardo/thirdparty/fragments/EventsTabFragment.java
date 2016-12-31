@@ -94,7 +94,7 @@ public class EventsTabFragment extends Fragment {
                 // String title, String host, String description, String startDate, String endDate, String numGuests, String url
                 Event e = new Event(explrObject.get("title").toString(), explrObject.get("host").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
-                        "10", explrObject.get("URL").toString());
+                        explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString());
                 myDataset.add(e);
             }
         } catch (JSONException e) {

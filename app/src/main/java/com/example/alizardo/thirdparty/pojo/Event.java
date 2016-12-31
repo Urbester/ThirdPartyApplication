@@ -11,23 +11,33 @@ public class Event {
     private String description;
     private String startDate;
     private String endDate;
-    private String numGuests;
+    private String maxGuests;
     private String url;
     private String local;
+    private String slotsLeft;
 
     public Event() {
 
     }
 
-    public Event(String title, String host, String local, String description, String startDate, String endDate, String numGuests, String url) {
+    public Event(String title, String host, String local, String description, String startDate, String endDate, String maxGuests, String url, String slotsLeft) {
         this.host = host;
         this.title = title;
         this.local = local;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.numGuests = numGuests;
+        this.maxGuests = maxGuests;
         this.url = url;
+        this.slotsLeft = slotsLeft;
+    }
+
+    public String getMaxGuests() {
+        return maxGuests;
+    }
+
+    public void setMaxGuests(String maxGuests) {
+        this.maxGuests = maxGuests;
     }
 
     public String getLocal() {
@@ -70,12 +80,13 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public String getNumGuests() {
-        return numGuests;
+    public String getSlotsLeft() {
+        
+        return slotsLeft;
     }
 
-    public void setNumGuests(String numGuests) {
-        this.numGuests = numGuests;
+    public void setSlotsLeft(String slotsLeft) {
+        this.slotsLeft = slotsLeft;
     }
 
     public String getUrl() {

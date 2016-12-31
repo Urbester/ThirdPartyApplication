@@ -56,7 +56,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());
                     b.putString("endDate", mDataset.get(pos).getEndDate());
-                    b.putString("numGuests", mDataset.get(pos).getNumGuests());
+                    b.putString("maxGuests", mDataset.get(pos).getMaxGuests());
+                    b.putString("slotsLeft", mDataset.get(pos).getSlotsLeft());
                     b.putString("url", mDataset.get(pos).getUrl());
                     Intent i = new Intent(activity, EventOverviewActivity.class);
                     i.putExtras(b);

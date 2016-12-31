@@ -22,9 +22,10 @@ public class EventOverviewActivity extends AppCompatActivity {
     private TextView description;
     private TextView startDate;
     private TextView endDate;
-    private TextView numGuests;
     private ImageView url;
-    
+    private TextView maxGuests;
+    private TextView slotsLeft;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +56,16 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.description = (TextView) v.findViewById(R.id.description);
         this.startDate = (TextView) v.findViewById(R.id.startDate);
         this.endDate = (TextView) v.findViewById(R.id.endDate);
-        this.numGuests = (TextView) v.findViewById(R.id.numGuests);
+        this.maxGuests = (TextView) v.findViewById(R.id.maxGuests);
+        this.slotsLeft = (TextView) v.findViewById(R.id.slotsLeft);
         this.url = (ImageView) v.findViewById(R.id.pic);
 
         this.host.setText(b.getString("host"));
         this.description.setText(b.getString("description"));
         this.startDate.setText(b.getString("startDate"));
         this.endDate.setText(b.getString("endDate"));
-        this.numGuests.setText(b.getString("numGuests"));
+        this.maxGuests.setText(b.getString("maxGuests"));
+        this.slotsLeft.setText(b.getString("slotsLeft"));
 
         Context context = getApplicationContext();
         Picasso.with(context).load(b.getString("url")).into(this.url);
@@ -72,8 +75,7 @@ public class EventOverviewActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem)
-    {
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
         onBackPressed();
         return true;
     }

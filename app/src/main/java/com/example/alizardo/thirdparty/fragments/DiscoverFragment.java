@@ -84,7 +84,9 @@ public class DiscoverFragment extends Fragment {
                 // String title, String host, String description, String startDate, String endDate, String numGuests, String url
                 Event e = new Event(explrObject.get("title").toString(), explrObject.get("host").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
-                        explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString());
+                        explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString(),
+                        explrObject.get("host_name").toString(), explrObject.get("host_email").toString(), explrObject.get("host_URL").toString()
+                );
                 myDataset.add(e);
             }
         } catch (JSONException e) {

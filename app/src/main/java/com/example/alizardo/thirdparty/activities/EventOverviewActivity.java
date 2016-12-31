@@ -25,6 +25,10 @@ public class EventOverviewActivity extends AppCompatActivity {
     private ImageView url;
     private TextView maxGuests;
     private TextView slotsLeft;
+    private ImageView userPic;
+    private TextView userName;
+    private TextView userEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,10 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.endDate = (TextView) v.findViewById(R.id.endDate);
         this.maxGuests = (TextView) v.findViewById(R.id.maxGuests);
         this.slotsLeft = (TextView) v.findViewById(R.id.slotsLeft);
+        this.userName = (TextView) v.findViewById(R.id.userDetailName);
+        this.userEmail = (TextView) v.findViewById(R.id.userDetailEmail);
+
+        this.userPic = (ImageView) v.findViewById(R.id.userDetailPic);
 
         this.url = (ImageView) v.findViewById(R.id.pic);
 
@@ -67,8 +75,11 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.endDate.setText(b.getString("endDate"));
         this.maxGuests.setText(b.getString("maxGuests"));
         this.slotsLeft.setText(b.getString("slotsLeft"));
+        this.userName.setText(b.getString("host_name"));
+        this.userEmail.setText(b.getString("host_email"));
 
         Context context = getApplicationContext();
+        Picasso.with(context).load(b.getString("host_URL")).into(this.userPic);
         Picasso.with(context).load(b.getString("url")).into(this.url);
 
         setTitle(b.getString("title"));

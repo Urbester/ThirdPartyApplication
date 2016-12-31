@@ -15,12 +15,16 @@ public class Event {
     private String url;
     private String local;
     private String slotsLeft;
+    private String hostName;
+    private String hostEmail;
+    private String hostURL;
 
     public Event() {
 
     }
 
-    public Event(String title, String host, String local, String description, String startDate, String endDate, String maxGuests, String url, String slotsLeft) {
+    public Event(String title, String host, String local, String description, String startDate,
+                 String endDate, String maxGuests, String url, String slotsLeft, String hostName, String hostEmail, String hostURL) {
         this.host = host;
         this.title = title;
         this.local = local;
@@ -30,6 +34,9 @@ public class Event {
         this.maxGuests = maxGuests;
         this.url = url;
         this.slotsLeft = slotsLeft;
+        this.hostEmail = hostEmail;
+        this.hostName = hostName;
+        this.hostURL = hostURL;
     }
 
     public String getMaxGuests() {
@@ -81,7 +88,7 @@ public class Event {
     }
 
     public String getSlotsLeft() {
-        
+
         return slotsLeft;
     }
 
@@ -103,5 +110,29 @@ public class Event {
 
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public String getHostEmail() {
+        return hostEmail;
+    }
+
+    public void setHostEmail(String hostEmail) {
+        this.hostEmail = hostEmail;
+    }
+
+    public String getHostURL() {
+        return hostURL;
+    }
+
+    public void setHostURL(String hostURL) {
+        this.hostURL = hostURL;
     }
 }

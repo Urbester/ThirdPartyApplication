@@ -32,7 +32,7 @@ import java.util.List;
  * Use the {@link EventsTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventsTabFragment extends Fragment {
+public class    EventsTabFragment extends Fragment {
 
     private static final String ARG_PAGE_NUMBER = "page_number";
 

@@ -52,11 +52,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     Bundle b = new Bundle();
                     int pos =  (int) v.findViewById(R.id.title).getTag();
                     b.putString("title", mDataset.get(pos).getTitle());
-                    b.putString("host", mDataset.get(pos).getHost());
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());
                     b.putString("endDate", mDataset.get(pos).getEndDate());
-                    b.putString("numGuests", mDataset.get(pos).getNumGuests());
+                    b.putString("maxGuests", mDataset.get(pos).getMaxGuests());
+                    b.putString("slotsLeft", mDataset.get(pos).getSlotsLeft());
+                    b.putString("host_name", mDataset.get(pos).getHostName());
+                    b.putString("host_email", mDataset.get(pos).getHostEmail());
+                    b.putString("host_URL", mDataset.get(pos).getHostURL());
                     b.putString("url", mDataset.get(pos).getUrl());
                     Intent i = new Intent(activity, EventOverviewActivity.class);
                     i.putExtras(b);

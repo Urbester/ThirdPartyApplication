@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.fragments.DiscoverFragment;
 import com.example.alizardo.thirdparty.pojo.Event;
 
 import org.json.JSONArray;
@@ -39,10 +40,18 @@ public class SearchActivity extends AppCompatActivity {
 
     private JSONObject data;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(getIntent()!=null)
+            try {
+                this.data = new JSONObject(getIntent().getStringExtra("events").toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         setContentView(R.layout.activity_search);
 
@@ -61,7 +70,7 @@ public class SearchActivity extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject explrObject = jsonArray.getJSONObject(i);
                 // String title, String host, String description, String startDate, String endDate, String numGuests, String url
-                Event e = new Event(explrObject.get("title").toString(), explrObject.get("host").toString(), explrObject.get("local").toString(),
+                Event e = new Event(explrObject.get("title").toString(), explrObject.get("host_name").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
                         "10", explrObject.get("URL").toString());
                 myDataset.add(e);
@@ -69,7 +78,6 @@ public class SearchActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         myAppAdapter = new MyAppAdapter(myDataset, SearchActivity.this);
         listView.setAdapter(myAppAdapter);

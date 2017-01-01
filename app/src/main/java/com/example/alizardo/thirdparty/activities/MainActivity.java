@@ -177,9 +177,8 @@ public class MainActivity extends AppCompatActivity {
                 showEvents(menuItem, mDrawer);
                 break;
             case R.id.nav_third_activity:
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
-                return;
+                search(menuItem,mDrawer,this);
+                break;
 
             default:
                 discover(menuItem, mDrawer);
@@ -207,12 +206,12 @@ public class MainActivity extends AppCompatActivity {
         new GetPublicEvents(m, d).execute("/v1/event/list/public", headers, payload);
     }
 
-    private void search(MenuItem m, DrawerLayout d) {
+    private void search(MenuItem m, DrawerLayout d, MainActivity that) {
         HashMap<String, String> headers = new HashMap<>();
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", facebook_user_token);
-        new GetSearchEvents(m, d).execute("/v1/event/list/public", headers, payload);
+        new GetSearchEvents(m, d, that).execute("/v1/event/list/public", headers, payload);
     }
 
 
@@ -363,14 +362,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class GetSearchEvents extends AsyncTask<Object, Void, String> {
-        private SearchActivity searchActivity;
         private MenuItem menuItem;
         private DrawerLayout mDrawer;
+        private MainActivity that;
 
-        public GetSearchEvents(MenuItem m, DrawerLayout d) {
+        public GetSearchEvents(MenuItem m, DrawerLayout d, MainActivity that) {
             super();
             this.menuItem = m;
             this.mDrawer = d;
+            this.that = that;
         }
 
         @Override
@@ -407,6 +407,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            Intent intent = new Intent(that,SearchActivity.class);
+            intent.putExtra("events",map.toString());
+            //Bundle extras = intent.getExtras();
+            //intent.putString("events",map.toString());
+            startActivity(intent);
 
 
 

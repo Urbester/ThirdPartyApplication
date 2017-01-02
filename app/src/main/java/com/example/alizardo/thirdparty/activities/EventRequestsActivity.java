@@ -41,24 +41,10 @@ public class EventRequestsActivity extends AppCompatActivity {
         }
 
 
-        RequestsAdapter mAdapter;
-        RecyclerView mRecyclerView;
-        LinearLayoutManager mLayoutManager;
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.users_accepted);
-
-        // specify an adapter
-        mAdapter = new RequestsAdapter(this.token, usersPending);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
+        listUsersRejected();
+        listUsersPending();
+        listUsersInvited();
+        listUsersAccepted();
     }
 
 
@@ -88,7 +74,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         RecyclerView mRecyclerView;
         LinearLayoutManager mLayoutManager;
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.users_invited);
+        mRecyclerView = (RecyclerView) findViewById(R.id.users_accepted);
 
         // specify an adapter
         mAdapter = new RequestsAdapter(this.token, usersInvited);

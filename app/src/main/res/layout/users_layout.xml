@@ -9,9 +9,6 @@
         android:id="@+id/userDetailLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/form_bottom_margin"
-        android:layout_marginLeft="@dimen/form_left_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
 
         <ImageView
@@ -22,7 +19,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/form_left_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:orientation="vertical">
 
             <TextView

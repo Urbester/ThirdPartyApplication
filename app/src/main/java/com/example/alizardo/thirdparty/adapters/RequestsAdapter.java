@@ -79,7 +79,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             Picasso.with(context).load(u.getString("pic")).into(holder.url);
             holder.url.setTag(u.getString("pic"));
             // Change name
-            holder.email.setText(u.getString("name"));
+            holder.name.setText(u.getString("name"));
             // Change email
             holder.email.setText(u.getString("email"));
 

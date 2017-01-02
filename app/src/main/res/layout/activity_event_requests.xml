@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/content_event_requests"
@@ -36,70 +36,64 @@
         tools:context="com.example.alizardo.thirdparty.activities.EventRequestsActivity"
         tools:showIn="@layout/activity_event_requests">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/accepted"
-            android:id="@+id/requests_accepted"
-            android:textSize="@dimen/form_small" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/users_accepted"
-            android:layout_below="@+id/requests_accepted"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:scrollbars="vertical" />
+            <TextView
+                android:id="@+id/requests_accepted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/accepted"
+                android:textSize="@dimen/form_small" />
 
-        <TextView
-            android:layout_below="@+id/users_accepted"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/requests_pending"
-            android:text="@string/pending"
-            android:textSize="@dimen/form_small" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/users_accepted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/users_pending"
-            android:layout_below="@+id/requests_pending"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:scrollbars="vertical" />
+            <TextView
+                android:id="@+id/requests_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pending"
+                android:textSize="@dimen/form_small" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/requests_invited"
-            android:layout_below="@+id/users_pending"
-            android:text="@string/invited"
-            android:textSize="@dimen/form_small" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/users_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/users_invited"
-            android:layout_below="@+id/requests_invited"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:scrollbars="vertical" />
+            <TextView
+                android:id="@+id/requests_invited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/invited"
+                android:textSize="@dimen/form_small" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_below="@+id/users_invited"
-            android:id="@+id/requests_rejected"
-            android:layout_height="match_parent"
-            android:text="@string/rejected"
-            android:textSize="@dimen/form_small" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/users_invited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/users_rejected"
-            android:layout_below="@+id/requests_rejected"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:scrollbars="vertical" />
+            <TextView
+                android:id="@+id/requests_rejected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rejected"
+                android:textSize="@dimen/form_small" />
 
-    </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/users_rejected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -29,8 +29,7 @@ import org.json.JSONObject;
  */
 public class EventFragment extends Fragment {
 
-    private JSONObject data;
-    private JSONObject pending, rejected, invited, hosting;
+    private JSONObject pending, rejected, invited, hosting, accepted;
     private String token;
 
 
@@ -46,13 +45,14 @@ public class EventFragment extends Fragment {
     }
 
     public static EventFragment newInstance(String token, JSONObject pending,
-                                            JSONObject hosting, JSONObject invited, JSONObject rejected) {
+                                            JSONObject hosting, JSONObject invited, JSONObject rejected, JSONObject accepted) {
         EventFragment fragment = new EventFragment();
         Bundle args = new Bundle();
         args.putString("pending", pending.toString());
         args.putString("hosting", hosting.toString());
         args.putString("invited", invited.toString());
         args.putString("rejected", rejected.toString());
+        args.putString("accepted", accepted.toString());
         args.putString("token", token);
         fragment.setArguments(args);
         return fragment;
@@ -68,6 +68,7 @@ public class EventFragment extends Fragment {
                 this.hosting = new JSONObject(getArguments().getString("hosting"));
                 this.rejected = new JSONObject(getArguments().getString("rejected"));
                 this.invited = new JSONObject(getArguments().getString("invited"));
+                this.accepted = new JSONObject(getArguments().getString("accepted"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -85,7 +86,7 @@ public class EventFragment extends Fragment {
 
         final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
         TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext(), this.token,
-                this.pending, this.rejected, this.invited, this.hosting);
+                this.pending, this.rejected, this.invited, this.hosting, this.accepted);
 
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
@@ -108,6 +109,8 @@ public class EventFragment extends Fragment {
                     case 3:
                         break;
                     case 4:
+                        break;
+                    case 5:
                         break;
                     default:
                         break;

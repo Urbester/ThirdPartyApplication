@@ -98,9 +98,9 @@ public class EventsTabFragment extends Fragment {
                         explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString(),
                         explrObject.get("host_name").toString(), explrObject.get("host_email").toString(),
                         explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
-                        Boolean.parseBoolean((String) explrObject.get("isHost")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
+                        Boolean.parseBoolean((String) explrObject.get("isHosting")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
                         Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending"))
-                        , Boolean.parseBoolean((String) explrObject.get("isRejected"))
+                        ,Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }

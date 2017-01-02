@@ -65,7 +65,7 @@ public class EventOverviewActivity extends AppCompatActivity {
                 HashMap<String, String> payload = new HashMap<>();
 
                 headers.put("X-Auth-Token", token);
-                new AskParty().execute("/v1/event/ask?" + id, headers, payload);
+                new AskParty().execute("/v1/event/ask?id=" + id, headers, payload);
 
             }
         });
@@ -168,7 +168,7 @@ public class EventOverviewActivity extends AppCompatActivity {
 
             try {
                 map = new JSONObject(response);
-                Snackbar.make(getCurrentFocus(), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             } catch (JSONException e) {
                 e.printStackTrace();

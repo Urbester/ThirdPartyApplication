@@ -18,13 +18,20 @@ public class Event {
     private String hostEmail;
     private String hostURL;
     private String id;
+    private boolean isHost;
+    private boolean isAccepted;
+    private boolean isInvited;
+    private boolean isPending;
+    private boolean isRejected;
 
     public Event() {
 
     }
 
     public Event(String title, String local, String description, String startDate,
-                 String endDate, String maxGuests, String url, String slotsLeft, String hostName, String hostEmail, String hostURL, String id) {
+                 String endDate, String maxGuests, String url, String slotsLeft, String hostName,
+                 String hostEmail, String hostURL, String id,
+                 boolean isHost, boolean isAccepted, boolean isInvited, boolean isPending, boolean isRejected) {
         this.title = title;
         this.local = local;
         this.description = description;
@@ -37,6 +44,11 @@ public class Event {
         this.hostName = hostName;
         this.id = id;
         this.hostURL = hostURL;
+        this.isAccepted = isAccepted;
+        this.isHost = isHost;
+        this.isInvited = isInvited;
+        this.isPending = isPending;
+        this.isRejected = isRejected;
     }
 
     public String getId() {

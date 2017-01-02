@@ -179,16 +179,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_third_activity:
                 search(menuItem,mDrawer,this);
                 break;
-
             default:
                 discover(menuItem, mDrawer);
-
                 break;
         }
         return;
     }
 
-    // TODO: Not implemented
     private void showEvents(MenuItem m, DrawerLayout d) {
         HashMap<String, String> headers = new HashMap<>();
         HashMap<String, String> payload = new HashMap<>();

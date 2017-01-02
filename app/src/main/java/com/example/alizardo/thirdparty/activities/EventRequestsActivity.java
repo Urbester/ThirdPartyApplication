@@ -16,6 +16,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
     }
 
 }

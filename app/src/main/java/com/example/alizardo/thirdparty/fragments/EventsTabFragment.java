@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alizardo.thirdparty.R;
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.adapters.EventAdapter;
 import com.example.alizardo.thirdparty.libs.Utils;
 import com.example.alizardo.thirdparty.pojo.Event;
 
@@ -40,7 +40,7 @@ public class EventsTabFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private EventAdapter mAdapter;
     private JSONObject data;
     private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
@@ -109,7 +109,7 @@ public class EventsTabFragment extends Fragment {
 
 
         // specify an adapter
-        this.mAdapter = new MyAdapter(token, myDataset);
+        this.mAdapter = new EventAdapter(token, myDataset);
 
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());

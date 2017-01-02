@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            fragment = DiscoverFragment.newInstance(map);
+            fragment = DiscoverFragment.newInstance(facebook_user_token, map);
 
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -407,6 +407,7 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(that,SearchActivity.class);
             intent.putExtra("events",map.toString());
+            intent.putExtra("token", facebook_user_token);
             //Bundle extras = intent.getExtras();
             //intent.putString("events",map.toString());
             startActivity(intent);

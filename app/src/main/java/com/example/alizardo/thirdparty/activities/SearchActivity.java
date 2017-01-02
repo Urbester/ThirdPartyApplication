@@ -36,7 +36,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<Event> postArrayList;
 
     private JSONObject data;
-
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (getIntent() != null)
             try {
+                this.token = getIntent().getStringExtra("token");
                 this.data = new JSONObject(getIntent().getStringExtra("events").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -81,7 +82,7 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        myAppAdapter = new MyAppAdapter(myDataset, SearchActivity.this);
+        myAppAdapter = new MyAppAdapter(this.token, myDataset, SearchActivity.this);
         listView.setAdapter(myAppAdapter);
     }
 
@@ -91,6 +92,7 @@ public class SearchActivity extends AppCompatActivity {
         private RecyclerView mRecyclerView;
         private MyAdapter mAdapter;
         private RecyclerView.LayoutManager mLayoutManager;
+        private String token;
 
 
         public List<Event> parkingList;
@@ -98,7 +100,8 @@ public class SearchActivity extends AppCompatActivity {
         public Context context;
         ArrayList<Event> arraylist;
 
-        private MyAppAdapter(List<Event> apps, Context context) {
+        private MyAppAdapter(String t, List<Event> apps, Context context) {
+            this.token = t;
             this.parkingList = apps;
             this.context = context;
             arraylist = new ArrayList<Event>();
@@ -137,7 +140,7 @@ public class SearchActivity extends AppCompatActivity {
             this.mRecyclerView = (RecyclerView) rowView.findViewById(R.id.my_recycler_view);
 
             // specify an adapter
-            this.mAdapter = new MyAdapter(this.parkingList);
+            this.mAdapter = new MyAdapter(token, this.parkingList);
 
             // use a linear layout manager
             this.mLayoutManager = new LinearLayoutManager(context);

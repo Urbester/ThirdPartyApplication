@@ -108,8 +108,13 @@ public class EventOverviewActivity extends AppCompatActivity {
         deleteParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ASYNC TASK to delete activity and return to main activity
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
 
+                headers.put("X-Auth-Token", token);
+                payload.put("Id", String.valueOf(id));
+                new DeleteParty().execute("/v1/event", "DELETE", headers, payload);
+                onBackPressed();
             }
         });
 
@@ -167,6 +172,35 @@ public class EventOverviewActivity extends AppCompatActivity {
         protected String doInBackground(Object... params) {
             Utils util = new Utils();
             return util.requestGET((String) params[0], (HashMap) params[1]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response);
+                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    class DeleteParty extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+            Log.i("STATUS", "Delete party.");
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
         }
 
         protected void onPostExecute(String response) {

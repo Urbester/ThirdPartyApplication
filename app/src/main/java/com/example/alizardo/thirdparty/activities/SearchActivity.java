@@ -70,9 +70,11 @@ public class SearchActivity extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject explrObject = jsonArray.getJSONObject(i);
                 // String title, String host, String description, String startDate, String endDate, String numGuests, String url
-                Event e = new Event(explrObject.get("title").toString(), explrObject.get("host_name").toString(), explrObject.get("local").toString(),
+                Event e = new Event(explrObject.get("title").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
-                        "10", explrObject.get("URL").toString());
+                        explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString(),
+                        explrObject.get("host_name").toString(), explrObject.get("host_email").toString(), explrObject.get("host_URL").toString(), explrObject.get("id").toString()
+                );
                 myDataset.add(e);
             }
         } catch (JSONException e) {

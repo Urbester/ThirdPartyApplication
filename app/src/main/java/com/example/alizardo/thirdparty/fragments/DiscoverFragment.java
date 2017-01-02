@@ -36,6 +36,7 @@ public class DiscoverFragment extends Fragment {
     TabLayout tabLayout;
 
     private JSONObject data;
+    private String token;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,9 +45,10 @@ public class DiscoverFragment extends Fragment {
 
     }
 
-    public static DiscoverFragment newInstance(JSONObject data) {
+    public static DiscoverFragment newInstance(String token, JSONObject data) {
         DiscoverFragment fragment = new DiscoverFragment();
         Bundle args = new Bundle();
+        args.putString("token", token);
         args.putString("events", data.toString());
         fragment.setArguments(args);
         return fragment;
@@ -57,6 +59,7 @@ public class DiscoverFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             try {
+                this.token = getArguments().getString("token");
                 this.data = new JSONObject(getArguments().getString("events"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -98,7 +101,7 @@ public class DiscoverFragment extends Fragment {
         }
 
         // specify an adapter
-        this.mAdapter = new MyAdapter(myDataset);
+        this.mAdapter = new MyAdapter(this.token, myDataset);
 
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());

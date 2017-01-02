@@ -102,6 +102,7 @@ public class SearchActivity extends AppCompatActivity {
             arraylist = new ArrayList<Event>();
             arraylist.addAll(parkingList);
 
+
         }
 
         @Override
@@ -120,7 +121,13 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         @Override
+        public int getItemViewType(int position) {
+            return position;
+        }
+
+        @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+
 
             LayoutInflater inflater = getLayoutInflater();
             // Inflate the layout for this fragment
@@ -140,6 +147,7 @@ public class SearchActivity extends AppCompatActivity {
             this.mRecyclerView.setAdapter(this.mAdapter);
 
             return rowView;
+
 
         }
 

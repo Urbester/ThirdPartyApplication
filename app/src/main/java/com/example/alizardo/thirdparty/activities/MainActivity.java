@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private String user_image_url;
     private Bundle basicInfo;
 
-    private JSONObject pending, rejected, invited, hosting;
+    private JSONObject pending, rejected, invited, hosting, accepted;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 showEvents(menuItem, mDrawer);
                 break;
             case R.id.nav_third_activity:
-                search(menuItem,mDrawer,this);
+                search(menuItem, mDrawer, this);
                 break;
             default:
                 discover(menuItem, mDrawer);
@@ -405,13 +405,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Intent intent = new Intent(that,SearchActivity.class);
-            intent.putExtra("events",map.toString());
+            Intent intent = new Intent(that, SearchActivity.class);
+            intent.putExtra("events", map.toString());
             intent.putExtra("token", facebook_user_token);
             //Bundle extras = intent.getExtras();
             //intent.putString("events",map.toString());
             startActivity(intent);
-
 
 
             // Highlight the selected item has been done by NavigationView
@@ -562,6 +561,52 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Log.e("Hosting", response);
+            accepted(facebook_user_token);
+        }
+    }
+
+    private void accepted(String accessToken) {
+
+        HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> payload = new HashMap<>();
+
+        headers.put("X-Auth-Token", accessToken);
+        new GetAccepted().execute("/v1/event/list/hosting", headers, payload);
+    }
+
+    class GetAccepted extends AsyncTask<Object, Void, String> {
+
+        public GetAccepted() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            try {
+                Utils util = new Utils();
+                return util.requestGET((String) params[0], (HashMap) params[1]);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+            try {
+                accepted = new JSONObject(response);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.e("Accepted", response);
             rejected(facebook_user_token);
         }
     }
@@ -573,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        new GetRejectedEvents().execute("/v1/event/list/rejected", headers, payload);
+        new GetRejectedEvents().execute("/v1/event/list/accepted", headers, payload);
     }
 
     class GetRejectedEvents extends AsyncTask<Object, Void, String> {
@@ -610,7 +655,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Rejected", response);
 
             // call fragment
-            EventFragment fragment = EventFragment.newInstance(facebook_user_token, pending, hosting, invited, rejected);
+            EventFragment fragment = EventFragment.newInstance(facebook_user_token, pending, hosting, invited, rejected, accepted);
 
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();

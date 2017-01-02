@@ -15,13 +15,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
 
-    private JSONObject pending, rejected, invited, hosting;
+    private JSONObject pending, rejected, invited, hosting, accepted;
 
     private String token;
 
 
     public TabsPagerAdapter(FragmentManager fm, Context context, String token, JSONObject pending,
-                            JSONObject rejected, JSONObject invited, JSONObject hosting) {
+                            JSONObject rejected, JSONObject invited, JSONObject hosting, JSONObject accepted) {
         super(fm);
         this.token = token;
         this.context = context;
@@ -29,6 +29,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         this.hosting = hosting;
         this.rejected = rejected;
         this.invited = invited;
+        this.accepted = accepted;
     }
 
     @Override
@@ -42,6 +43,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 return EventsTabFragment.newInstance(token, hosting, position + 1);
             case 3:
                 return EventsTabFragment.newInstance(token, rejected, position + 1);
+            case 4:
+                return EventsTabFragment.newInstance(token, accepted, position + 1);
             default:
                 return EventsTabFragment.newInstance(token, pending, position + 1);
         }
@@ -49,7 +52,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -67,6 +70,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 3:
                 output = context.getResources().getString(R.string.myevents_tab_rejected);
+                break;
+            case 4:
+                output = context.getResources().getString(R.string.myevents_tab_accepted);
                 break;
             default:
                 output = "";

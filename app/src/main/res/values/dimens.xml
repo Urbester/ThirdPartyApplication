@@ -19,5 +19,6 @@
     <dimen name="img_evt_overview">200dp</dimen>
     <dimen name="create_form_top">50dp</dimen>
     <dimen name="small_text">15dp</dimen>
+    <dimen name="emailsize">15sp</dimen>
 
 </resources>

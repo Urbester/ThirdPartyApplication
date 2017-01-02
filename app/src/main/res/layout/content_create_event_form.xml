@@ -98,6 +98,20 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="Max Guests"
+                android:textSize="@dimen/form" />
+
+            <EditText
+                android:id="@+id/NewEventFormMaxGuests"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/form_bottom_margin"
+                android:hint="5"
+                android:inputType="numberSigned" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="Start Date"
                 android:textSize="@dimen/form" />
 

@@ -1,7 +1,5 @@
 package com.example.alizardo.thirdparty.pojo;
 
-import org.json.JSONArray;
-
 import java.io.Serializable;
 
 /**
@@ -27,11 +25,6 @@ public class Event implements Serializable {
     private boolean isInvited;
     private boolean isPending;
     private boolean isRejected;
-    private JSONArray usersAccepted;
-    private JSONArray usersInvited;
-    private JSONArray usersPending;
-    private JSONArray usersRejected;
-    private JSONArray usersAvailable;
 
     public Event() {
 
@@ -40,8 +33,7 @@ public class Event implements Serializable {
     public Event(String title, String local, String description, String startDate,
                  String endDate, String maxGuests, String url, String slotsLeft, String hostName,
                  String hostEmail, String hostURL, String id,
-                 boolean isHost, boolean isAccepted, boolean isInvited, boolean isPending, boolean isRejected,
-                 JSONArray usersAccepted, JSONArray usersInvited, JSONArray usersPending, JSONArray usersRejected, JSONArray usersAvailable) {
+                 boolean isHost, boolean isAccepted, boolean isInvited, boolean isPending, boolean isRejected) {
         this.title = title;
         this.local = local;
         this.description = description;
@@ -59,51 +51,6 @@ public class Event implements Serializable {
         this.isInvited = isInvited;
         this.isPending = isPending;
         this.isRejected = isRejected;
-        this.usersAccepted = usersAccepted;
-        this.usersAvailable = usersAvailable;
-        this.usersInvited = usersInvited;
-        this.usersPending = usersPending;
-        this.usersRejected = usersRejected;
-    }
-
-    public JSONArray getUsersAccepted() {
-        return usersAccepted;
-    }
-
-    public void setUsersAccepted(JSONArray usersAccepted) {
-        this.usersAccepted = usersAccepted;
-    }
-
-    public JSONArray getUsersInvited() {
-        return usersInvited;
-    }
-
-    public void setUsersInvited(JSONArray usersInvited) {
-        this.usersInvited = usersInvited;
-    }
-
-    public JSONArray getUsersPending() {
-        return usersPending;
-    }
-
-    public void setUsersPending(JSONArray usersPending) {
-        this.usersPending = usersPending;
-    }
-
-    public JSONArray getUsersRejected() {
-        return usersRejected;
-    }
-
-    public void setUsersRejected(JSONArray usersRejected) {
-        this.usersRejected = usersRejected;
-    }
-
-    public JSONArray getUsersAvailable() {
-        return usersAvailable;
-    }
-
-    public void setUsersAvailable(JSONArray usersAvailable) {
-        this.usersAvailable = usersAvailable;
     }
 
     public boolean isHost() {

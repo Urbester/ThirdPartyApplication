@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
-import com.example.alizardo.thirdparty.pojo.Event;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -94,11 +93,15 @@ public class EventOverviewActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton acceptedRequests = (FloatingActionButton) findViewById(R.id.fabAccepted);
-        acceptedRequests.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton requests = (FloatingActionButton) findViewById(R.id.fabAccepted);
+        requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ASYNC TASK to activity with all users accepted
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
+
+                headers.put("X-Auth-Token", token);
+                new AskParty().execute("/v1/event/list?id=" + id, headers, payload);
 
             }
         });

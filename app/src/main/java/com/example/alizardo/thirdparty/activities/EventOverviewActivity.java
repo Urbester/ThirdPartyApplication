@@ -256,6 +256,7 @@ public class EventOverviewActivity extends AppCompatActivity {
                 i.putExtra("usersInvited", usersInvited.toString());
                 i.putExtra("usersPending", usersPending.toString());
                 i.putExtra("usersRejected", usersRejected.toString());
+                i.putExtra("token", token);
                 startActivity(i);
             } catch (JSONException e) {
                 e.printStackTrace();

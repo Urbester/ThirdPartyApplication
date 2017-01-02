@@ -33,4 +33,8 @@
     <string name="put_your_image_link_here">Put your image link here !</string>
     <string name="search_hint">Search something</string>
     <string name="title_activity_event_requests">EventRequestsActivity</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+    <string name="invited">Invited</string>
+    <string name="pending">Pending</string>
 </resources>

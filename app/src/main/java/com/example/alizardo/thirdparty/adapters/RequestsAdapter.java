@@ -36,9 +36,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             this.token = t;
             this.v = v;
 
-            url = (ImageView) v.findViewById(R.id.pic);
-            name = (TextView) v.findViewById(R.id.userDetailName);
-            email = (TextView) v.findViewById(R.id.userDetailEmail);
+            url = (ImageView) v.findViewById(R.id.users_layout_userDetailPic);
+            name = (TextView) v.findViewById(R.id.users_layout_userDetailName);
+            email = (TextView) v.findViewById(R.id.users_layout_userDetailEmail);
 
             //TODO colocar aqui os buttons
         }

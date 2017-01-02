@@ -235,7 +235,7 @@ public class EventOverviewActivity extends AppCompatActivity {
 
         protected String doInBackground(Object... params) {
             Utils util = new Utils();
-            return util.request((String) params[0], (String) params[1], (HashMap) params[2], (HashMap) params[3]);
+            return util.requestGET((String) params[0], (HashMap) params[1]);
         }
 
         protected void onPostExecute(String response) {

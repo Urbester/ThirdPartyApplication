@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.adapters.RequestsAdapter;
@@ -27,7 +28,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setTitle("Requests");
 
         this.token = getIntent().getStringExtra("token");
         try {
@@ -39,12 +40,27 @@ public class EventRequestsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        listUsersAccepted();
-        listUsersInvited();
-        listUsersPending();
-        listUsersRejected();
+
+        RequestsAdapter mAdapter;
+        RecyclerView mRecyclerView;
+        LinearLayoutManager mLayoutManager;
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.users_accepted);
+
+        // specify an adapter
+        mAdapter = new RequestsAdapter(this.token, usersPending);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
+
 
     private void listUsersAccepted() {
         RequestsAdapter mAdapter;
@@ -126,5 +142,12 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        onBackPressed();
+        return true;
+    }
+
 
 }

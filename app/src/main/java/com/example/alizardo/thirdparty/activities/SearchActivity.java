@@ -1,11 +1,10 @@
 
 package com.example.alizardo.thirdparty.activities;
 
-import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -17,11 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.adapters.MyAdapter;
-import com.example.alizardo.thirdparty.fragments.DiscoverFragment;
 import com.example.alizardo.thirdparty.pojo.Event;
 
 import org.json.JSONArray;
@@ -41,12 +38,11 @@ public class SearchActivity extends AppCompatActivity {
     private JSONObject data;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getIntent()!=null)
+        if (getIntent() != null)
             try {
                 this.data = new JSONObject(getIntent().getStringExtra("events").toString());
             } catch (JSONException e) {
@@ -73,7 +69,11 @@ public class SearchActivity extends AppCompatActivity {
                 Event e = new Event(explrObject.get("title").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
                         explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString(),
-                        explrObject.get("host_name").toString(), explrObject.get("host_email").toString(), explrObject.get("host_URL").toString(), explrObject.get("id").toString()
+                        explrObject.get("host_name").toString(), explrObject.get("host_email").toString(),
+                        explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
+                        Boolean.parseBoolean((String) explrObject.get("isHost")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
+                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending"))
+                        , Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }

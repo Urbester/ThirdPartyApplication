@@ -18,7 +18,11 @@ import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class EventOverviewActivity extends AppCompatActivity {
@@ -33,7 +37,6 @@ public class EventOverviewActivity extends AppCompatActivity {
     private TextView userName;
     private TextView userEmail;
     private String token;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class EventOverviewActivity extends AppCompatActivity {
                 HashMap<String, String> payload = new HashMap<>();
 
                 headers.put("X-Auth-Token", token);
-                new AskParty.execute("/v1/event/list/public", "GET", headers, payload);
+                new AskParty().execute("/v1/event/list/public", headers, payload);
 
             }
         });
@@ -94,7 +97,6 @@ public class EventOverviewActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         FloatingActionButton deleteParty = (FloatingActionButton) findViewById(R.id.fabDelete);
@@ -144,25 +146,31 @@ public class EventOverviewActivity extends AppCompatActivity {
     }
 
 
-    class AskParty extends AsyncTask<String, Void, String> {
+    class AskParty extends AsyncTask<Object, Void, String> {
 
         protected void onPreExecute() {
             Log.i("STATUS", "Ask to join the party.");
         }
 
-        protected String doInBackground(String... params) {
+        protected String doInBackground(Object... params) {
             Utils util = new Utils();
-            return util.requestGET(params[0]);
+            return util.requestGET((String) params[0], (HashMap) params[1]);
         }
 
         protected void onPostExecute(String response) {
-            if (response == null) {
-                response = "THERE WAS AN ERROR";
+            if (response == null || Objects.equals(response, "")) {
+                return;
             }
-            Utils util = new Utils();
-            HashMap map = util.jsonToHashMap(response);
 
-            // TREAT DATA IN map HERE //
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response);
+                Snackbar.make(getCurrentFocus(), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }

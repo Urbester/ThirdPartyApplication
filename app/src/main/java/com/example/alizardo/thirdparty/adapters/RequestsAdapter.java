@@ -1,6 +1,7 @@
 package com.example.alizardo.thirdparty.adapters;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         private ImageView url;
         private TextView name;
         private TextView email;
+        private FloatingActionButton accept, reject;
 
         public ViewHolder(String t, View v, JSONArray u) {
             super(v);
@@ -39,8 +41,13 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             url = (ImageView) v.findViewById(R.id.users_layout_userDetailPic);
             name = (TextView) v.findViewById(R.id.users_layout_userDetailName);
             email = (TextView) v.findViewById(R.id.users_layout_userDetailEmail);
+            accept = (FloatingActionButton) v.findViewById(R.id.accept_user);
+            reject = (FloatingActionButton) v.findViewById(R.id.reject_user);
 
             //TODO colocar aqui os buttons
+
+
+
         }
 
         public View getV() {

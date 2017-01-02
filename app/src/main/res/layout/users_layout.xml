@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,15 +27,43 @@
                 android:id="@+id/users_layout_userDetailName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form_small" />
+                android:textSize="@dimen/small"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/users_layout_userDetailEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/emailsize" />
+                android:textSize="@dimen/small" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/accept_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:tint="@color/accept"
+                    app:backgroundTint="@android:color/white"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/account_check" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/reject_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:tint="@color/red"
+                    app:backgroundTint="@android:color/white"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/account_off" />
+            </LinearLayout>
 
         </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

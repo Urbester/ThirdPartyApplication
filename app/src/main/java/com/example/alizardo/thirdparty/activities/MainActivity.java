@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        new GetAccepted().execute("/v1/event/list/hosting", headers, payload);
+        new GetAccepted().execute("/v1/event/list/accepted", headers, payload);
     }
 
     class GetAccepted extends AsyncTask<Object, Void, String> {
@@ -618,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        new GetRejectedEvents().execute("/v1/event/list/accepted", headers, payload);
+        new GetRejectedEvents().execute("/v1/event/list/rejected", headers, payload);
     }
 
     class GetRejectedEvents extends AsyncTask<Object, Void, String> {

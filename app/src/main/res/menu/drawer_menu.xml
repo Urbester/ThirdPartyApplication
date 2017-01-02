@@ -11,6 +11,10 @@
             android:icon="@drawable/calendar_clock"
             android:title="Events" />
         <item
+            android:id="@+id/nav_third_activity"
+            android:icon="@android:drawable/ic_search_category_default"
+            android:title="Search" />
+        <item
             android:id="@+id/footer_space"
             android:checkable="false"
             android:enabled="false"

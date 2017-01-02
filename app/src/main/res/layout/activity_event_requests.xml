@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/accepted"
                 android:textSize="@dimen/form_small" />
+            <View android:layout_height="2px" android:layout_width="fill_parent" android:background="@color/grey"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/users_accepted"
@@ -61,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pending"
                 android:textSize="@dimen/form_small" />
+            <View android:layout_height="2px" android:layout_width="fill_parent" android:background="@color/grey"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/users_pending"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/invited"
                 android:textSize="@dimen/form_small" />
+            <View android:layout_height="2px" android:layout_width="fill_parent" android:background="@color/grey"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/users_invited"
@@ -87,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rejected"
                 android:textSize="@dimen/form_small" />
+            <View android:layout_height="2px" android:layout_width="fill_parent" android:background="@color/grey"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/users_rejected"

@@ -51,11 +51,11 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             url = (ImageView) v.findViewById(R.id.users_layout_userDetailPic);
             name = (TextView) v.findViewById(R.id.users_layout_userDetailName);
             email = (TextView) v.findViewById(R.id.users_layout_userDetailEmail);
+            accept = (FloatingActionButton) v.findViewById(R.id.accept_user);
 
+            reject = (FloatingActionButton) v.findViewById(R.id.reject_user);
             if (isPending) {
-                accept = (FloatingActionButton) v.findViewById(R.id.accept_user);
 
-                reject = (FloatingActionButton) v.findViewById(R.id.reject_user);
 
                 accept.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -67,6 +67,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
                         headers.put("X-Auth-Token", token);
                         payload.put("Email", email.getText().toString());
                         payload.put("Id", String.valueOf(id));
+
+                        reject.setVisibility(View.INVISIBLE);
+                        accept.setVisibility(View.INVISIBLE);
 
                         new AcceptUser().execute("/v1/event/list/pending", "POST", headers, payload);
 
@@ -84,9 +87,14 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
                         payload.put("Email", email.getText().toString());
                         payload.put("Id", String.valueOf(id));
 
-                        new AcceptUser().execute("/v1/event/list/pending", "DELETE", headers, payload);
+                        reject.setVisibility(View.INVISIBLE);
+                        accept.setVisibility(View.INVISIBLE);
+                        new RejectUser().execute("/v1/event/list/pending", "DELETE", headers, payload);
                     }
                 });
+            } else {
+                accept.setVisibility(View.INVISIBLE);
+                reject.setVisibility(View.INVISIBLE);
             }
 
 
@@ -114,7 +122,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
                     return;
                 }
                 Toast.makeText(getV().getContext(), "User accepted to the party.", Toast.LENGTH_SHORT).show();
-                return;
             }
         }
 
@@ -134,7 +141,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
                     return;
                 }
                 Toast.makeText(getV().getContext(), "User rejected from the party.", Toast.LENGTH_SHORT).show();
-                return;
             }
         }
 

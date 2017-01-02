@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
+import com.example.alizardo.thirdparty.pojo.Event;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -38,6 +40,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private TextView userEmail;
     private String token;
     private int id;
+    private LinearLayout hostButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.slotsLeft = (TextView) v.findViewById(R.id.slotsLeft);
         this.userName = (TextView) v.findViewById(R.id.userDetailName);
         this.userEmail = (TextView) v.findViewById(R.id.userDetailEmail);
+        this.hostButtons = (LinearLayout) v.findViewById(R.id.host_buttons);
 
         this.userPic = (ImageView) v.findViewById(R.id.userDetailPic);
 
@@ -132,6 +136,12 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.slotsLeft.setText(b.getString("slotsLeft"));
         this.userName.setText(b.getString("host_name"));
         this.userEmail.setText(b.getString("host_email"));
+
+        if(!b.getSerializable("evt").equals(true)){
+            this.hostButtons.setVisibility(View.GONE
+            );
+        }
+
 
         Context context = getApplicationContext();
         Picasso.with(context).load(b.getString("host_URL")).into(this.userPic);

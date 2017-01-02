@@ -1,10 +1,12 @@
 package com.example.alizardo.thirdparty.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by Eduardo Silva on 28/12/2016.
  */
 
-public class Event {
+public class Event implements Serializable{
 
     private String title;
     private String description;

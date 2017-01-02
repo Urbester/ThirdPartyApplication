@@ -46,7 +46,6 @@
             android:name=".activities.CreateEventFormActivity"
             android:label="@string/title_activity_create_event_form"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".activities.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -56,8 +55,10 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-
+        <activity
+            android:name=".activities.EventRequestsActivity"
+            android:label="@string/title_activity_event_requests"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

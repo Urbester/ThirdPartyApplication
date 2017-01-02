@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alizardo.thirdparty.R;
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.adapters.EventAdapter;
 import com.example.alizardo.thirdparty.adapters.TabsPagerAdapter;
 
 import org.json.JSONException;
@@ -39,7 +39,7 @@ public class EventFragment extends Fragment {
     TabLayout tabLayout;
     private static final String ARG_PAGE_NUMBER = "page_number";
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private EventAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public EventFragment() {

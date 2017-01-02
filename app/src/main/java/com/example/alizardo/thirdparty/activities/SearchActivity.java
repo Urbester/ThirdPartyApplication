@@ -18,7 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.example.alizardo.thirdparty.R;
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.adapters.EventAdapter;
 import com.example.alizardo.thirdparty.pojo.Event;
 
 import org.json.JSONArray;
@@ -73,8 +73,8 @@ public class SearchActivity extends AppCompatActivity {
                         explrObject.get("host_name").toString(), explrObject.get("host_email").toString(),
                         explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
                         Boolean.parseBoolean((String) explrObject.get("isHosting")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
-                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending"))
-                        , Boolean.parseBoolean((String) explrObject.get("isRejected"))
+                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
+                        Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }
@@ -90,7 +90,7 @@ public class SearchActivity extends AppCompatActivity {
     public class MyAppAdapter extends BaseAdapter {
 
         private RecyclerView mRecyclerView;
-        private MyAdapter mAdapter;
+        private EventAdapter mAdapter;
         private RecyclerView.LayoutManager mLayoutManager;
         private String token;
 
@@ -140,7 +140,7 @@ public class SearchActivity extends AppCompatActivity {
             this.mRecyclerView = (RecyclerView) rowView.findViewById(R.id.my_recycler_view);
 
             // specify an adapter
-            this.mAdapter = new MyAdapter(token, this.parkingList);
+            this.mAdapter = new EventAdapter(token, this.parkingList);
 
             // use a linear layout manager
             this.mLayoutManager = new LinearLayoutManager(context);

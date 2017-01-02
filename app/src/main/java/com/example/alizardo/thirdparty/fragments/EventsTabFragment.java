@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alizardo.thirdparty.R;
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.adapters.EventAdapter;
 import com.example.alizardo.thirdparty.libs.Utils;
 import com.example.alizardo.thirdparty.pojo.Event;
 
@@ -40,7 +40,7 @@ public class EventsTabFragment extends Fragment {
 
 
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private EventAdapter mAdapter;
     private JSONObject data;
     private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
@@ -92,15 +92,14 @@ public class EventsTabFragment extends Fragment {
             jsonArray = this.data.getJSONArray("Result");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject explrObject = jsonArray.getJSONObject(i);
-                // String title, String host, String description, String startDate, String endDate, String numGuests, String url
                 Event e = new Event(explrObject.get("title").toString(), explrObject.get("local").toString(),
                         explrObject.get("description").toString(), explrObject.get("startDate").toString(), explrObject.get("endDate").toString(),
                         explrObject.get("maxGuests").toString(), explrObject.get("URL").toString(), explrObject.get("slotsLeft").toString(),
                         explrObject.get("host_name").toString(), explrObject.get("host_email").toString(),
                         explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
                         Boolean.parseBoolean((String) explrObject.get("isHosting")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
-                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending"))
-                        ,Boolean.parseBoolean((String) explrObject.get("isRejected"))
+                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
+                        Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }
@@ -110,7 +109,7 @@ public class EventsTabFragment extends Fragment {
 
 
         // specify an adapter
-        this.mAdapter = new MyAdapter(token, myDataset);
+        this.mAdapter = new EventAdapter(token, myDataset);
 
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());

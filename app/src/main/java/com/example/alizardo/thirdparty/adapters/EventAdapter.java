@@ -23,7 +23,7 @@ import java.util.List;
  * Created by Eduardo Silva on 27/12/2016.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> mDataset;
     private int pos;
     private String token;
@@ -80,7 +80,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String token, List<Event> myDataset) {
+    public EventAdapter(String token, List<Event> myDataset) {
         this.token = token;
         this.mDataset = myDataset;
     }

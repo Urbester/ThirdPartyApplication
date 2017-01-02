@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alizardo.thirdparty.R;
-import com.example.alizardo.thirdparty.adapters.MyAdapter;
+import com.example.alizardo.thirdparty.adapters.EventAdapter;
 import com.example.alizardo.thirdparty.libs.Utils;
 import com.example.alizardo.thirdparty.pojo.Event;
 
@@ -30,7 +30,7 @@ public class DiscoverFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private EventAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     TabLayout tabLayout;
@@ -91,8 +91,8 @@ public class DiscoverFragment extends Fragment {
                         explrObject.get("host_name").toString(), explrObject.get("host_email").toString(),
                         explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
                         Boolean.parseBoolean((String) explrObject.get("isHosting")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
-                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending"))
-                        , Boolean.parseBoolean((String) explrObject.get("isRejected"))
+                        Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
+                        Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }
@@ -101,7 +101,7 @@ public class DiscoverFragment extends Fragment {
         }
 
         // specify an adapter
-        this.mAdapter = new MyAdapter(this.token, myDataset);
+        this.mAdapter = new EventAdapter(this.token, myDataset);
 
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());

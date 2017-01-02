@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Eduardo Silva on 28/12/2016.
  */
 
-public class Event implements Serializable{
+public class Event implements Serializable {
 
     private String title;
     private String description;
@@ -52,7 +52,6 @@ public class Event implements Serializable{
         this.isPending = isPending;
         this.isRejected = isRejected;
     }
-
 
     public boolean isHost() {
         return isHost;

@@ -1,6 +1,7 @@
 package com.example.alizardo.thirdparty.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,9 +18,9 @@ import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
-import com.example.alizardo.thirdparty.pojo.Event;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +42,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private String token;
     private int id;
     private LinearLayout hostButtons;
+    private JSONArray usersAccepted, usersInvited, usersRejected, usersPending;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +96,15 @@ public class EventOverviewActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton acceptedRequests = (FloatingActionButton) findViewById(R.id.fabAccepted);
-        acceptedRequests.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton requests = (FloatingActionButton) findViewById(R.id.fabAccepted);
+        requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ASYNC TASK to activity with all users accepted
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
+
+                headers.put("X-Auth-Token", token);
+                new GetLists().execute("/v1/event/list?id=" + id, headers, payload);
 
             }
         });
@@ -214,6 +220,44 @@ public class EventOverviewActivity extends AppCompatActivity {
                 map = new JSONObject(response);
                 Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    class GetLists extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+            Log.i("STATUS", "Getting lists.");
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.requestGET((String) params[0], (HashMap) params[1]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response).getJSONObject("Result");
+                usersAccepted = map.getJSONArray("usersAccepted");
+                usersInvited = map.getJSONArray("usersInvited");
+                usersPending = map.getJSONArray("usersPending");
+                usersRejected = map.getJSONArray("usersRejected");
+                Intent i = new Intent(EventOverviewActivity.this, EventRequestsActivity.class);
+                i.putExtra("usersAccepted", usersAccepted.toString());
+                i.putExtra("usersInvited", usersInvited.toString());
+                i.putExtra("usersPending", usersPending.toString());
+                i.putExtra("usersRejected", usersRejected.toString());
+                i.putExtra("token", token);
+                startActivity(i);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

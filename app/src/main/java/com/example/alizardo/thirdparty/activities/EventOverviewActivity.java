@@ -104,7 +104,7 @@ public class EventOverviewActivity extends AppCompatActivity {
                 HashMap<String, String> payload = new HashMap<>();
 
                 headers.put("X-Auth-Token", token);
-                new AskParty().execute("/v1/event/list?id=" + id, headers, payload);
+                new GetLists().execute("/v1/event/list?id=" + id, headers, payload);
 
             }
         });

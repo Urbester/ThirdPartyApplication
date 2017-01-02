@@ -40,6 +40,9 @@ public class EventRequestsActivity extends AppCompatActivity {
         }
 
         listUsersAccepted();
+        listUsersInvited();
+        listUsersPending();
+        listUsersRejected();
 
     }
 

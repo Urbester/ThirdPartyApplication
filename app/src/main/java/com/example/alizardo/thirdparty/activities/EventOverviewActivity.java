@@ -37,6 +37,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private TextView userName;
     private TextView userEmail;
     private String token;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class EventOverviewActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         this.token = b.getString("token");
+        this.id = b.getInt("id");
 
         FloatingActionButton askToJoin = (FloatingActionButton) findViewById(R.id.fab);
         askToJoin.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +65,7 @@ public class EventOverviewActivity extends AppCompatActivity {
                 HashMap<String, String> payload = new HashMap<>();
 
                 headers.put("X-Auth-Token", token);
-                new AskParty().execute("/v1/event/list/public", headers, payload);
+                new AskParty().execute("/v1/event/ask?" + id, headers, payload);
 
             }
         });

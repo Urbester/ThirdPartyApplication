@@ -53,6 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     Bundle b = new Bundle();
                     int pos = (int) v.findViewById(R.id.title).getTag();
+                    b.putInt("id", Integer.parseInt(mDataset.get(pos).getId()));
                     b.putString("title", mDataset.get(pos).getTitle());
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());

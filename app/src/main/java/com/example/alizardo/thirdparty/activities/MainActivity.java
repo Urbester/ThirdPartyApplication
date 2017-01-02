@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(MainActivity.this, "Getting events.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Getting events", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(MainActivity.this, "Getting set", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Getting events", Toast.LENGTH_SHORT).show();
         }
 
         @Override

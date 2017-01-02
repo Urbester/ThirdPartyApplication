@@ -20,6 +20,7 @@ public class EventRequestsActivity extends AppCompatActivity {
     private JSONArray usersInvited;
     private JSONArray usersPending;
     private JSONArray usersRejected;
+    private int partyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class EventRequestsActivity extends AppCompatActivity {
             this.usersInvited = new JSONArray(getIntent().getStringExtra("usersInvited"));
             this.usersPending = new JSONArray(getIntent().getStringExtra("usersPending"));
             this.usersRejected = new JSONArray(getIntent().getStringExtra("usersRejected"));
+            this.partyId = Integer.valueOf(getIntent().getStringExtra("Id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,7 +58,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.users_accepted);
 
         // specify an adapter
-        mAdapter = new RequestsAdapter(this.token, usersAccepted);
+        mAdapter = new RequestsAdapter(this.token, this.partyId, usersAccepted, false);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -78,7 +80,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.users_accepted);
 
         // specify an adapter
-        mAdapter = new RequestsAdapter(this.token, usersInvited);
+        mAdapter = new RequestsAdapter(this.token, this.partyId, usersInvited, false);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -98,7 +100,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.users_rejected);
 
         // specify an adapter
-        mAdapter = new RequestsAdapter(this.token, usersRejected);
+        mAdapter = new RequestsAdapter(this.token, this.partyId, usersRejected, false);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -118,7 +120,7 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.users_pending);
 
         // specify an adapter
-        mAdapter = new RequestsAdapter(this.token, usersPending);
+        mAdapter = new RequestsAdapter(this.token, this.partyId, usersPending, true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);

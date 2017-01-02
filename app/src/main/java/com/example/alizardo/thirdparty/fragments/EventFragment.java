@@ -31,6 +31,7 @@ public class EventFragment extends Fragment {
 
     private JSONObject data;
     private JSONObject pending, rejected, invited, hosting;
+    private String token;
 
 
     private OnFragmentInteractionListener mListener;
@@ -44,7 +45,7 @@ public class EventFragment extends Fragment {
     public EventFragment() {
     }
 
-    public static EventFragment newInstance(JSONObject pending,
+    public static EventFragment newInstance(String token, JSONObject pending,
                                             JSONObject hosting, JSONObject invited, JSONObject rejected) {
         EventFragment fragment = new EventFragment();
         Bundle args = new Bundle();
@@ -52,6 +53,7 @@ public class EventFragment extends Fragment {
         args.putString("hosting", hosting.toString());
         args.putString("invited", invited.toString());
         args.putString("rejected", rejected.toString());
+        args.putString("token", token);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,6 +63,7 @@ public class EventFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             try {
+                this.token = getArguments().getString("token");
                 this.pending = new JSONObject(getArguments().getString("pending"));
                 this.hosting = new JSONObject(getArguments().getString("hosting"));
                 this.rejected = new JSONObject(getArguments().getString("rejected"));
@@ -81,7 +84,7 @@ public class EventFragment extends Fragment {
         setupTablayout(v);
 
         final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
-        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext(),
+        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext(), this.token,
                 this.pending, this.rejected, this.invited, this.hosting);
 
         pager.setAdapter(adapter);

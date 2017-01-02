@@ -2,18 +2,23 @@ package com.example.alizardo.thirdparty.activities;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.libs.Utils;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 
 public class EventOverviewActivity extends AppCompatActivity {
@@ -27,6 +32,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private ImageView userPic;
     private TextView userName;
     private TextView userEmail;
+    private String token;
 
 
     @Override
@@ -37,7 +43,8 @@ public class EventOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        Bundle b = getIntent().getExtras();
+        this.token = b.getString("token");
 
         FloatingActionButton askToJoin = (FloatingActionButton) findViewById(R.id.fab);
         askToJoin.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +55,12 @@ public class EventOverviewActivity extends AppCompatActivity {
                 FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.fab);
                 btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.accept)));
                 btn.setImageResource(R.drawable.check_circle);
-                //TODO: ASYNC TASK
 
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
 
+                headers.put("X-Auth-Token", token);
+                new AskParty.execute("/v1/event/list/public", "GET", headers, payload);
 
             }
         });
@@ -99,8 +109,6 @@ public class EventOverviewActivity extends AppCompatActivity {
 
         View v = (View) findViewById(R.id.content_event_overview);
 
-        Bundle b = getIntent().getExtras();
-
         this.description = (TextView) v.findViewById(R.id.description);
         this.startDate = (TextView) v.findViewById(R.id.startDate);
         this.endDate = (TextView) v.findViewById(R.id.endDate);
@@ -136,6 +144,27 @@ public class EventOverviewActivity extends AppCompatActivity {
     }
 
 
+    class AskParty extends AsyncTask<String, Void, String> {
 
+        protected void onPreExecute() {
+            Log.i("STATUS", "Ask to join the party.");
+        }
+
+        protected String doInBackground(String... params) {
+            Utils util = new Utils();
+            return util.requestGET(params[0]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null) {
+                response = "THERE WAS AN ERROR";
+            }
+            Utils util = new Utils();
+            HashMap map = util.jsonToHashMap(response);
+
+            // TREAT DATA IN map HERE //
+
+        }
+    }
 
 }

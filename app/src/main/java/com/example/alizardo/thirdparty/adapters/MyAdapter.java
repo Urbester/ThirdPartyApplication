@@ -26,6 +26,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Event> mDataset;
     private int pos;
+    private String token;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -35,11 +36,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private View v;
         private int pos;
         private List<Event> mDataset;
+        private String token;
 
-        public ViewHolder(View v, List<Event> ds) {
+        public ViewHolder(String t, View v, List<Event> ds) {
             super(v);
             mDataset = ds;
-
+            this.token = t;
             title = (TextView) v.findViewById(R.id.title);
             url = (ImageView) v.findViewById(R.id.pic);
             cv = (CardView) v.findViewById(R.id.card_view);
@@ -50,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 public void onClick(View v) {
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     Bundle b = new Bundle();
-                    int pos =  (int) v.findViewById(R.id.title).getTag();
+                    int pos = (int) v.findViewById(R.id.title).getTag();
                     b.putString("title", mDataset.get(pos).getTitle());
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());
@@ -63,6 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     b.putString("url", mDataset.get(pos).getUrl());
                     Intent i = new Intent(activity, EventOverviewActivity.class);
                     i.putExtras(b);
+                    i.putExtra("token", token);
                     activity.startActivity(i);
                 }
             });
@@ -75,8 +78,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Event> myDataset) {
-        mDataset = myDataset;
+    public MyAdapter(String token, List<Event> myDataset) {
+        this.token = token;
+        this.mDataset = myDataset;
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -90,7 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        ViewHolder vh = new ViewHolder(v, this.mDataset);
+        ViewHolder vh = new ViewHolder(this.token, v, this.mDataset);
         return vh;
     }
 

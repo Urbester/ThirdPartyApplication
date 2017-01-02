@@ -609,7 +609,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Rejected", response);
 
             // call fragment
-            EventFragment fragment = EventFragment.newInstance(pending, hosting, invited, rejected);
+            EventFragment fragment = EventFragment.newInstance(facebook_user_token, pending, hosting, invited, rejected);
 
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();

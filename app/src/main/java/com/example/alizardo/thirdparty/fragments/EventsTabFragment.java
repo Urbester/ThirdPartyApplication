@@ -32,7 +32,7 @@ import java.util.List;
  * Use the {@link EventsTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class    EventsTabFragment extends Fragment {
+public class EventsTabFragment extends Fragment {
 
     private static final String ARG_PAGE_NUMBER = "page_number";
 
@@ -45,17 +45,19 @@ public class    EventsTabFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     TabLayout tabLayout;
     private int page;
+    private String token;
 
 
     public EventsTabFragment() {
         // Required empty public constructor
     }
 
-    public static EventsTabFragment newInstance(JSONObject data, int page) {
+    public static EventsTabFragment newInstance(String token, JSONObject data, int page) {
         EventsTabFragment fragment = new EventsTabFragment();
         Bundle args = new Bundle();
         args.putString("events", data.toString());
         args.putInt(ARG_PAGE_NUMBER, page);
+        args.putString("token", token);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +67,7 @@ public class    EventsTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             try {
-
+                this.token = getArguments().getString("token");
                 this.data = new JSONObject(getArguments().getString("events"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -106,8 +108,9 @@ public class    EventsTabFragment extends Fragment {
             e.printStackTrace();
         }
 
+
         // specify an adapter
-        this.mAdapter = new MyAdapter(myDataset);
+        this.mAdapter = new MyAdapter(token, myDataset);
 
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());

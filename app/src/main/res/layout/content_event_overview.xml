@@ -194,7 +194,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/host_buttons">
+
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabInvite"

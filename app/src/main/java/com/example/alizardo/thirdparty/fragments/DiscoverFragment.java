@@ -20,8 +20,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DiscoverFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -78,6 +83,7 @@ public class DiscoverFragment extends Fragment {
 
         Utils u = new Utils();
 
+
         JSONArray jsonArray = null;
         List<Event> myDataset = new ArrayList<>();
         try {
@@ -94,6 +100,8 @@ public class DiscoverFragment extends Fragment {
                         Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
                         Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
+
+
                 myDataset.add(e);
             }
         } catch (JSONException e) {

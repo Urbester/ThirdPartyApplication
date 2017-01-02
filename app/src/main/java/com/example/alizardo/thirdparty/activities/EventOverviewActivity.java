@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private int id;
     private LinearLayout hostButtons;
     private JSONArray usersAccepted, usersInvited, usersRejected, usersPending;
+    private CoordinatorLayout askButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +137,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.userName = (TextView) v.findViewById(R.id.userDetailName);
         this.userEmail = (TextView) v.findViewById(R.id.userDetailEmail);
         this.hostButtons = (LinearLayout) v.findViewById(R.id.host_buttons);
+        this.askButton = (CoordinatorLayout) v.findViewById(R.id.fab);
 
         this.userPic = (ImageView) v.findViewById(R.id.userDetailPic);
 
@@ -148,9 +151,11 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.userName.setText(b.getString("host_name"));
         this.userEmail.setText(b.getString("host_email"));
 
-        if(!b.getSerializable("evt").equals(true)){
-            this.hostButtons.setVisibility(View.GONE
-            );
+        if (!b.getSerializable("evt").equals(true)) {
+            this.hostButtons.setVisibility(View.GONE);
+        }
+        else{
+            askToJoin.setVisibility(View.GONE);
         }
 
 

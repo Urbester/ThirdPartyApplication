@@ -74,9 +74,7 @@ public class SearchActivity extends AppCompatActivity {
                         explrObject.get("host_URL").toString(), explrObject.get("id").toString(),
                         Boolean.parseBoolean((String) explrObject.get("isHosting")), Boolean.parseBoolean((String) explrObject.get("isAccepted")),
                         Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
-                        Boolean.parseBoolean((String) explrObject.get("isRejected")),
-                        (JSONArray) explrObject.get("usersAccepted"), (JSONArray) explrObject.get("usersInvited"), (JSONArray) explrObject.get("usersPending"),
-                        (JSONArray) explrObject.get("usersRejected"), (JSONArray) explrObject.get("useresAvailable")
+                        Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
                 myDataset.add(e);
             }

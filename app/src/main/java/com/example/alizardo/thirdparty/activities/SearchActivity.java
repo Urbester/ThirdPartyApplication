@@ -76,7 +76,10 @@ public class SearchActivity extends AppCompatActivity {
                         Boolean.parseBoolean((String) explrObject.get("isInvited")), Boolean.parseBoolean((String) explrObject.get("isPending")),
                         Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
-                myDataset.add(e);
+
+                if (!e.isInvited() && !e.isPending() && !e.isAccepted() && !e.isRejected() && !e.isHost()) {
+                    myDataset.add(e);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

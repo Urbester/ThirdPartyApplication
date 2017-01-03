@@ -16,9 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.libs.Utils;
+import com.example.alizardo.thirdparty.pojo.Event;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,6 +59,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         this.token = b.getString("token");
         this.id = b.getInt("id");
+
 
         FloatingActionButton askToJoin = (FloatingActionButton) findViewById(R.id.fab);
         askToJoin.setOnClickListener(new View.OnClickListener() {
@@ -151,11 +154,27 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.userName.setText(b.getString("host_name"));
         this.userEmail.setText(b.getString("host_email"));
 
-        if (!b.getSerializable("evt").equals(true)) {
-            this.hostButtons.setVisibility(View.GONE);
-        }
-        else{
+        if (((Event) b.getSerializable("evt")).isHost()) {
+            Toast.makeText(this, "You are host of this event.", Toast.LENGTH_SHORT).show();
             askToJoin.setVisibility(View.GONE);
+        }else if(((Event) b.getSerializable("evt")).isRejected()){
+            Toast.makeText(this, "You were rejected of this event.", Toast.LENGTH_SHORT).show();
+            this.hostButtons.setVisibility(View.GONE);
+            askToJoin.setVisibility(View.GONE);
+        } else if(((Event) b.getSerializable("evt")).isAccepted()){
+            Toast.makeText(this, "You were accepted to join this event.", Toast.LENGTH_SHORT).show();
+            askToJoin.setVisibility(View.GONE);
+            this.hostButtons.setVisibility(View.GONE);
+        } else if(((Event) b.getSerializable("evt")).isInvited()){
+            Toast.makeText(this, "You were invited to join this event.", Toast.LENGTH_SHORT).show();
+            askToJoin.setVisibility(View.GONE);
+            this.hostButtons.setVisibility(View.GONE);
+        } else if(((Event) b.getSerializable("evt")).isPending()){
+            Toast.makeText(this, "Your request is pending.", Toast.LENGTH_SHORT).show();
+            this.hostButtons.setVisibility(View.GONE);
+            askToJoin.setVisibility(View.GONE);
+        } else {
+            this.hostButtons.setVisibility(View.GONE);
         }
 
 

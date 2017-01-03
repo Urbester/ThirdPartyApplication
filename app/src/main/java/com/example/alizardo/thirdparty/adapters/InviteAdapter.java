@@ -103,7 +103,7 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.ViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public InviteAdapter(int partyId, JSONArray users) {
+    public InviteAdapter(String token, int partyId, JSONArray users) {
         this.token = token;
         this.users = users;
         this.partyId = partyId;

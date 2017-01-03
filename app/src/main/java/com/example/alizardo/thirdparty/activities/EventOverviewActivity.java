@@ -153,7 +153,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         });
 
 
-        FloatingActionButton rejectInvitedParty = (FloatingActionButton) findViewById(R.id.fabAcceptInvitedParty);
+        FloatingActionButton rejectInvitedParty = (FloatingActionButton) findViewById(R.id.fabRejectInvitedParty);
         acceptInvitedParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

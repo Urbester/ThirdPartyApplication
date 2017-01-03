@@ -38,4 +38,5 @@
     <string name="rejected">Rejected</string>
     <string name="invited">Invited</string>
     <string name="pending">Pending</string>
+    <string name="friends_list">Friends list</string>
 </resources>

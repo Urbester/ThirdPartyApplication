@@ -64,6 +64,8 @@
             android:name=".activities.EventRequestsActivity"
             android:label="@string/title_activity_event_requests"
             android:theme="@style/AppTheme" />
+        <activity android:name=".activities.InviteFriendsActivity"></activity>
     </application>
+
 
 </manifest>

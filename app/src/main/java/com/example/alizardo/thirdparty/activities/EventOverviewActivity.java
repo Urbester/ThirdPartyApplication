@@ -412,6 +412,7 @@ public class EventOverviewActivity extends AppCompatActivity {
             try {
                 map = new JSONObject(response);
                 Intent intent = new Intent(EventOverviewActivity.this, InviteFriendsActivity.class);
+                intent.putExtra("token",token);
                 intent.putExtra("map",map.toString());
                 intent.putExtra("id",id);
                 Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)

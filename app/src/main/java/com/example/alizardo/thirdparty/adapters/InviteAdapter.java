@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alizardo.thirdparty.R;
+import com.example.alizardo.thirdparty.activities.EventOverviewActivity;
 import com.example.alizardo.thirdparty.libs.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -53,6 +54,8 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.ViewHolder
             email = (TextView) v.findViewById(R.id.users_layout_userDetailEmail);
             invite = (FloatingActionButton) v.findViewById(R.id.accept_user);
 
+            FloatingActionButton reject = (FloatingActionButton) v.findViewById(R.id.reject_user);
+            reject.setVisibility(View.GONE);
 
             invite.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,8 +65,8 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.ViewHolder
                     HashMap<String, String> payload = new HashMap<>();
 
                     headers.put("X-Auth-Token", token);
-                    payload.put("Email", email.getText().toString());
                     payload.put("Id", String.valueOf(id));
+                    payload.put("Email", email.getText().toString());
 
                     invite.setVisibility(View.INVISIBLE);
 

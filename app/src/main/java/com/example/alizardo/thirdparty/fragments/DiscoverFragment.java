@@ -97,7 +97,7 @@ public class DiscoverFragment extends Fragment {
                 );
 
 
-                if (!e.isInvited() || !e.isPending() || !e.isAccepted() || !e.isRejected() || !e.isHost()) {
+                if (!e.isInvited() && !e.isPending() && !e.isAccepted() && !e.isRejected() && !e.isHost()) {
                     myDataset.add(e);
                 }
 

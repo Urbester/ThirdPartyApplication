@@ -77,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
                         Boolean.parseBoolean((String) explrObject.get("isRejected"))
                 );
 
-                if (!e.isInvited() || !e.isPending() || !e.isAccepted() || !e.isRejected() || !e.isHost()) {
+                if (!e.isInvited() && !e.isPending() && !e.isAccepted() && !e.isRejected() && !e.isHost()) {
                     myDataset.add(e);
                 }
             }

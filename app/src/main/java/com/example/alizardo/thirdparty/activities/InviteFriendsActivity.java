@@ -1,7 +1,7 @@
 package com.example.alizardo.thirdparty.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.adapters.InviteAdapter;
-import com.example.alizardo.thirdparty.adapters.RequestsAdapter;
 import com.example.alizardo.thirdparty.pojo.Event;
 
 import org.json.JSONArray;
@@ -20,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InviteFriendsActivity extends AppCompatActivity {
 
@@ -64,9 +62,6 @@ public class InviteFriendsActivity extends AppCompatActivity {
 
         jsonArray = null;
 
-
-        //this.friendName = (TextView) listView.findViewById(R.id.userDetailName);
-        //this.friendPic = (ImageView) listView.findViewById(R.id.userDetailPic);
 
         try {
             jsonArray = this.data.getJSONArray("Result");

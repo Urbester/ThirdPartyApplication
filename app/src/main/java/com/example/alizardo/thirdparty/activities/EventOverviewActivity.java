@@ -154,7 +154,7 @@ public class EventOverviewActivity extends AppCompatActivity {
 
 
         FloatingActionButton rejectInvitedParty = (FloatingActionButton) findViewById(R.id.fabRejectInvitedParty);
-        acceptInvitedParty.setOnClickListener(new View.OnClickListener() {
+        rejectInvitedParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> headers = new HashMap<>();
@@ -415,8 +415,6 @@ public class EventOverviewActivity extends AppCompatActivity {
                 intent.putExtra("token",token);
                 intent.putExtra("map",map.toString());
                 intent.putExtra("id",id);
-                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();

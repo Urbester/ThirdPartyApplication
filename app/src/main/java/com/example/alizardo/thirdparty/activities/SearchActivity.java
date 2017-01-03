@@ -86,7 +86,9 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         myAppAdapter = new MyAppAdapter(this.token, myDataset, SearchActivity.this);
+
         listView.setAdapter(myAppAdapter);
+        myAppAdapter.notifyDataSetChanged();
     }
 
 

@@ -195,6 +195,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:id="@+id/invited_buttons">
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabAcceptInvitedParty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/account_plus" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabRejectInvitedParty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:layout_anchor="@id/app_bar"
+                app:layout_anchorGravity="bottom|end"
+                app:srcCompat="@drawable/pencil_circle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:id="@+id/host_buttons">
 
 

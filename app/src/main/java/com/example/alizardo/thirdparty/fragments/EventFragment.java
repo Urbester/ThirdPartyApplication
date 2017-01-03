@@ -39,6 +39,9 @@ public class EventFragment extends Fragment {
     private static final String ARG_PAGE_NUMBER = "page_number";
     private RecyclerView mRecyclerView;
     private EventAdapter mAdapter;
+    private TabsPagerAdapter adapter;
+    private ViewPager pager;
+
     private RecyclerView.LayoutManager mLayoutManager;
 
     public EventFragment() {
@@ -84,50 +87,13 @@ public class EventFragment extends Fragment {
         //TabLayout Setup
         setupTablayout(v);
 
-        final ViewPager pager = (ViewPager) v.findViewById(R.id.pager);
-        TabsPagerAdapter adapter = new TabsPagerAdapter(getFragmentManager(), getContext(), this.token,
+        pager = (ViewPager) v.findViewById(R.id.pager);
+        adapter = new TabsPagerAdapter(getFragmentManager(), getContext(), this.token,
                 this.pending, this.rejected, this.invited, this.hosting, this.accepted);
+        adapter.notifyDataSetChanged();
 
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                pager.setCurrentItem(tab.getPosition());
-                Context context = getContext();
-
-                switch (tab.getPosition()) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    default:
-                        break;
-
-                }
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-
 
         return v;
     }
@@ -160,6 +126,14 @@ public class EventFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public TabsPagerAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(TabsPagerAdapter adapter) {
+        this.adapter = adapter;
     }
 
     /**

@@ -47,6 +47,7 @@ public class EventOverviewActivity extends AppCompatActivity {
     private LinearLayout hostButtons;
     private JSONArray usersAccepted, usersInvited, usersRejected, usersPending;
     private CoordinatorLayout askButton;
+    private LinearLayout invitedButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,34 @@ public class EventOverviewActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton acceptInvitedParty = (FloatingActionButton) findViewById(R.id.fabAcceptInvitedParty);
+        acceptInvitedParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
+
+                headers.put("X-Auth-Token", token);
+                payload.put("Id", String.valueOf(id));
+                new AcceptInviteParty().execute("/v1/event/accept?id=" + id, headers);
+                onBackPressed();
+            }
+        });
+
+
+        FloatingActionButton rejectInvitedParty = (FloatingActionButton) findViewById(R.id.fabAcceptInvitedParty);
+        acceptInvitedParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
+
+                headers.put("X-Auth-Token", token);
+                payload.put("Id", String.valueOf(id));
+                new RejectInviteParty().execute("/v1/event/reject?id=" + id, headers);
+                onBackPressed();
+            }
+        });
 
         View v = (View) findViewById(R.id.content_event_overview);
 
@@ -140,6 +169,7 @@ public class EventOverviewActivity extends AppCompatActivity {
         this.userName = (TextView) v.findViewById(R.id.userDetailName);
         this.userEmail = (TextView) v.findViewById(R.id.userDetailEmail);
         this.hostButtons = (LinearLayout) v.findViewById(R.id.host_buttons);
+        this.invitedButtons = (LinearLayout) v.findViewById(R.id.invited_buttons);
         this.askButton = (CoordinatorLayout) v.findViewById(R.id.fab);
 
         this.userPic = (ImageView) v.findViewById(R.id.userDetailPic);
@@ -157,13 +187,16 @@ public class EventOverviewActivity extends AppCompatActivity {
         if (((Event) b.getSerializable("evt")).isHost()) {
             Toast.makeText(this, "You are host of this event.", Toast.LENGTH_SHORT).show();
             askToJoin.setVisibility(View.GONE);
+            this.invitedButtons.setVisibility(View.GONE);
         }else if(((Event) b.getSerializable("evt")).isRejected()){
             Toast.makeText(this, "You were rejected of this event.", Toast.LENGTH_SHORT).show();
             this.hostButtons.setVisibility(View.GONE);
             askToJoin.setVisibility(View.GONE);
+            this.invitedButtons.setVisibility(View.GONE);
         } else if(((Event) b.getSerializable("evt")).isAccepted()){
             Toast.makeText(this, "You were accepted to join this event.", Toast.LENGTH_SHORT).show();
             askToJoin.setVisibility(View.GONE);
+            this.invitedButtons.setVisibility(View.GONE);
             this.hostButtons.setVisibility(View.GONE);
         } else if(((Event) b.getSerializable("evt")).isInvited()){
             Toast.makeText(this, "You were invited to join this event.", Toast.LENGTH_SHORT).show();
@@ -173,8 +206,10 @@ public class EventOverviewActivity extends AppCompatActivity {
             Toast.makeText(this, "Your request is pending.", Toast.LENGTH_SHORT).show();
             this.hostButtons.setVisibility(View.GONE);
             askToJoin.setVisibility(View.GONE);
+            this.invitedButtons.setVisibility(View.GONE);
         } else {
             this.hostButtons.setVisibility(View.GONE);
+            this.invitedButtons.setVisibility(View.GONE);
         }
 
 
@@ -283,6 +318,64 @@ public class EventOverviewActivity extends AppCompatActivity {
                 i.putExtra("Id", String.valueOf(id));
                 i.putExtra("token", token);
                 startActivity(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    class AcceptInviteParty extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.requestGET((String) params[0], (HashMap) params[1]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response);
+                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    class RejectInviteParty extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.requestGET((String) params[0], (HashMap) params[1]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response);
+                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

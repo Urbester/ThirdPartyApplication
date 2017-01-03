@@ -69,6 +69,8 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -90,6 +92,9 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.notifyDataSetChanged();
+
     }
 
     private void listUsersRejected() {
@@ -110,6 +115,8 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.notifyDataSetChanged();
     }
 
     private void listUsersPending() {
@@ -130,6 +137,8 @@ public class EventRequestsActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.notifyDataSetChanged();
 
     }
 

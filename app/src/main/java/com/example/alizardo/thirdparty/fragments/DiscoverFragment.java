@@ -118,6 +118,8 @@ public class DiscoverFragment extends Fragment {
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
         this.mRecyclerView.setAdapter(this.mAdapter);
 
+        this.mAdapter.notifyDataSetChanged();
+
         return v;
     }
 

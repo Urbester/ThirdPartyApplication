@@ -568,10 +568,9 @@ public class MainActivity extends AppCompatActivity {
     private void accepted(String accessToken) {
 
         HashMap<String, String> headers = new HashMap<>();
-        HashMap<String, String> payload = new HashMap<>();
 
         headers.put("X-Auth-Token", accessToken);
-        new GetAccepted().execute("/v1/event/list/accepted", headers, payload);
+        new GetAccepted().execute("/v1/event/list/accepted", headers);
     }
 
     class GetAccepted extends AsyncTask<Object, Void, String> {

@@ -55,7 +55,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                     int pos = (int) v.findViewById(R.id.title).getTag();
                     b.putInt("id", Integer.parseInt(mDataset.get(pos).getId()));
                     b.putString("title", mDataset.get(pos).getTitle());
-                    b.putSerializable("evt",mDataset.get(pos).isHost());
+                    b.putSerializable("evt",mDataset.get(pos));
                     b.putString("description", mDataset.get(pos).getDescription());
                     b.putString("startDate", mDataset.get(pos).getStartDate());
                     b.putString("endDate", mDataset.get(pos).getEndDate());

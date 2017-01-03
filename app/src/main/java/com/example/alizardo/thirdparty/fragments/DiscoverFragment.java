@@ -20,13 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class DiscoverFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -102,7 +97,10 @@ public class DiscoverFragment extends Fragment {
                 );
 
 
-                myDataset.add(e);
+                if (!e.isInvited() || !e.isPending() || !e.isAccepted() || !e.isRejected() || !e.isHost()) {
+                    myDataset.add(e);
+                }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();

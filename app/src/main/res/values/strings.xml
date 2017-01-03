@@ -18,11 +18,10 @@
     <string name="form_location">John Doe House</string>
     <string name="form_price">5€</string>
 
-    <string name="myevents_tab_invited">Invite</string>
-    <string name="myevents_tab_hosting">Host</string>
-    <string name="myevents_tab_rejected">Reject</string>
-    <string name="myevents_tab_pending">Wait</string>
-    <string name="myevents_tab_accepted">Going</string>
+    <string name="myevents_tab_invited">Invited</string>
+    <string name="myevents_tab_hosting">Hosting</string>
+    <string name="myevents_tab_rejected">Rejected</string>
+    <string name="myevents_tab_pending">Pending</string>
 
     <string name="title_activity_create_event_form">New Party</string>
 
@@ -38,4 +37,5 @@
     <string name="rejected">Rejected</string>
     <string name="invited">Invited</string>
     <string name="pending">Pending</string>
+    <string name="friends_list">Your list of friends</string>
 </resources>

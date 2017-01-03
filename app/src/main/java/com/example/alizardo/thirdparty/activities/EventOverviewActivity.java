@@ -86,7 +86,15 @@ public class EventOverviewActivity extends AppCompatActivity {
         inviteUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ASYNC TASK to activity with all users to invite
+
+                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> payload = new HashMap<>();
+
+                headers.put("X-Auth-Token", token);
+                //done: ASYNC TASK to activity with all users to invite
+                new InviteParty().execute("/v1/event/available?id=" + id, headers, payload);
+
+
 
             }
         });
@@ -376,6 +384,38 @@ public class EventOverviewActivity extends AppCompatActivity {
                 map = new JSONObject(response);
                 Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    class InviteParty extends AsyncTask<Object, Void, String> {
+
+        protected void onPreExecute() {
+            Log.i("STATUS", "Getting friends list.");
+        }
+
+        protected String doInBackground(Object... params) {
+            Utils util = new Utils();
+            return util.requestGET((String) params[0], (HashMap) params[1]);
+        }
+
+        protected void onPostExecute(String response) {
+            if (response == null || Objects.equals(response, "")) {
+                return;
+            }
+
+            JSONObject map = null;
+
+            try {
+                map = new JSONObject(response);
+                Intent intent = new Intent(EventOverviewActivity.this, InviteFriendsActivity.class);
+                intent.putExtra("map",map.toString());
+                Snackbar.make(findViewById(android.R.id.content), map.get("Result").toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

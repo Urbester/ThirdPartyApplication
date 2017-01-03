@@ -192,20 +192,22 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/invited_buttons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/invited_buttons">
-
+            android:orientation="horizontal">
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabAcceptInvitedParty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
+                android:tint="@color/accept"
+                app:backgroundTint="@android:color/white"
+                app:fabSize="mini"
                 app:layout_anchor="@id/app_bar"
                 app:layout_anchorGravity="bottom|end"
-                app:srcCompat="@drawable/account_plus" />
+                app:srcCompat="@drawable/account_check" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabRejectInvitedParty"
@@ -214,15 +216,18 @@
                 android:layout_margin="@dimen/fab_margin"
                 app:layout_anchor="@id/app_bar"
                 app:layout_anchorGravity="bottom|end"
-                app:srcCompat="@drawable/pencil_circle" />
+                android:tint="@color/red"
+                app:backgroundTint="@android:color/white"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/account_off" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/host_buttons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:id="@+id/host_buttons">
+            android:orientation="horizontal">
 
 
             <android.support.design.widget.FloatingActionButton

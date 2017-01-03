@@ -110,7 +110,7 @@ public class EventsTabFragment extends Fragment {
 
         // specify an adapter
         this.mAdapter = new EventAdapter(token, myDataset);
-
+        this.mAdapter.notifyDataSetChanged();
         // use a linear layout manager
         this.mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -119,6 +119,7 @@ public class EventsTabFragment extends Fragment {
         this.mRecyclerView.setHasFixedSize(true);
         this.mRecyclerView.setLayoutManager(this.mLayoutManager);
         this.mRecyclerView.setAdapter(this.mAdapter);
+
 
         return v;
 

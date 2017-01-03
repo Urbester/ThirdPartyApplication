@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alizardo.thirdparty.R;
 import com.example.alizardo.thirdparty.adapters.InviteAdapter;
@@ -67,10 +68,16 @@ public class InviteFriendsActivity extends AppCompatActivity {
             jsonArray = this.data.getJSONArray("Result");
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Toast.makeText(this, "There are no available friends to invite.", Toast.LENGTH_SHORT).show();
+            onBackPressed();
         }
 
-       listFriends();
+        try {
+            listFriends();
+        } catch (Exception e){
+            Toast.makeText(this, "There are no available friends to invite.", Toast.LENGTH_SHORT).show();
+            onBackPressed();
+        }
     }
 
     private void listFriends() {
